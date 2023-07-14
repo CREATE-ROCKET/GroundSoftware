@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"context"
@@ -26,16 +26,16 @@ var port serial.Port
 
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
-func (a *App) startup(ctx context.Context) {
+func (a *App) Startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-func (a *App) shutdown(ctx context.Context) {
+func (a *App) Shutdown(ctx context.Context) {
 }
 
-var addr = flag.String("addr", ":3007", "http service address")
+var Addr = flag.String("addr", ":3007", "http service address")
 
-func serveHome(w http.ResponseWriter, r *http.Request) {
+func ServeHome(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL)
 	if r.URL.Path != "/" {
 		http.Error(w, "Not found", http.StatusNotFound)

@@ -18,8 +18,8 @@
 
 <script setup>
 import { reactive, onMounted } from 'vue'
-import { SerialMonitor } from '../../wailsjs/go/main/App'
-import { SerialStop } from '../../wailsjs/go/main/App'
+import { SerialMonitor } from '../../wailsjs/go/handler/App'
+import { SerialStop } from '../../wailsjs/go/handler/App'
 
 function serial(event) {
   event.preventDefault()
@@ -51,9 +51,9 @@ let conn
 
 function scrollToBottom() {
   // document.getElementById("log").scrollIntoView(false)
-  // document.getElementById("monitor").scrollIntoView(false)
-  // document.getElementById("inputs").scrollIntoView(false)
-  document.scrollIntoView(false)
+  document.getElementById("monitor").scrollIntoView(false)
+  document.getElementById("inputs").scrollIntoView(false)
+  // document.scrollIntoView(false)
 }
 
 onMounted(() => {
@@ -100,6 +100,7 @@ onMounted(() => {
 })
 </script>
 
+
 <style scoped>
 .result {
   height: 20px;
@@ -125,7 +126,7 @@ onMounted(() => {
 
 #log {
   height: auto;
-  margin-bottom: 8%;
+  margin-bottom: 12px;
 }
 
 #inputs {

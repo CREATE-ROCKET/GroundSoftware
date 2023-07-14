@@ -2,10 +2,12 @@
 import HelloWorld from './components/HelloWorld.vue'</script>
 
 <template>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <HelloWorld/>
 </template>
 
-<style>
+{/* <style>
 #logo {
   display: block;
   width: 50%;
@@ -17,4 +19,4 @@ import HelloWorld from './components/HelloWorld.vue'</script>
   background-size: 100% 100%;
   background-origin: content-box;
 }
-</style>
+</style> */}
