@@ -61,3 +61,7 @@ func (h *Hub) SendText(text string) {
 	h.broadcast <- []byte(text)
 	log.Print(text)
 }
+
+func (h *Hub) SendError(text string) {
+	h.SendText("ERROR: " + text)
+}

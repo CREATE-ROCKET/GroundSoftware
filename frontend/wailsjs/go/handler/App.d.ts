@@ -4,6 +4,8 @@ import {menu} from '../models';
 
 export function ApplicationMenu():Promise<menu.Menu>;
 
+export function SerialSend(arg1:string):Promise<void>;
+
 export function SerialStart():Promise<void>;
 
 export function SerialStop():Promise<void>;

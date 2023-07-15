@@ -6,6 +6,10 @@ export function ApplicationMenu() {
   return window['go']['handler']['App']['ApplicationMenu']();
 }
 
+export function SerialSend(arg1) {
+  return window['go']['handler']['App']['SerialSend'](arg1);
+}
+
 export function SerialStart() {
   return window['go']['handler']['App']['SerialStart']();
 }

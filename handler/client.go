@@ -70,6 +70,7 @@ func (c *Client) readPump() {
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
+				// HUB.SendError(err.Error())
 			}
 			break
 		}
@@ -129,6 +130,7 @@ func ServeWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
+		HUB.SendError(err.Error())
 		return
 	}
 	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}

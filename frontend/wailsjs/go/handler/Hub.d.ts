@@ -3,4 +3,6 @@
 
 export function Run():Promise<void>;
 
+export function SendError(arg1:string):Promise<void>;
+
 export function SendText(arg1:string):Promise<void>;

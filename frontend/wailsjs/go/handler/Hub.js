@@ -6,6 +6,10 @@ export function Run() {
   return window['go']['handler']['Hub']['Run']();
 }
 
+export function SendError(arg1) {
+  return window['go']['handler']['Hub']['SendError'](arg1);
+}
+
 export function SendText(arg1) {
   return window['go']['handler']['Hub']['SendText'](arg1);
 }
