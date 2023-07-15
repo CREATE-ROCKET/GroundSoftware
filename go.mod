@@ -1,4 +1,4 @@
-module changeme
+module github.com/Luftalian/Computer_software
 
 go 1.18
 

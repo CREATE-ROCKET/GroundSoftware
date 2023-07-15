@@ -5,7 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'</script>
   <HelloWorld/>
 </template>
 
-<style>
+{/* <style>
 #logo {
   display: block;
   width: 50%;
@@ -17,4 +17,4 @@ import HelloWorld from './components/HelloWorld.vue'</script>
   background-size: 100% 100%;
   background-origin: content-box;
 }
-</style>
+</style> */}

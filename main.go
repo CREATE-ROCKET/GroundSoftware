@@ -5,6 +5,9 @@ import (
 	"flag"
 	"net/http"
 
+	"github.com/Luftalian/Computer_software/handler"
+	"github.com/Luftalian/Computer_software/model"
+
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
@@ -15,33 +18,36 @@ var assets embed.FS
 
 func main() {
 	// Create an instance of the app structure
-	app := NewApp()
+	app := handler.NewApp()
 
+	// websocket server
 	flag.Parse()
-	hub := newHub()
-	HUB = hub
-	go hub.run()
-	http.HandleFunc("/", serveHome)
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		serveWs(hub, w, r)
-	})
+	hub := model.NewHub()
+	model.HUB = hub
+	go handler.Run(hub)
 
-	go http.ListenAndServe(*addr, nil)
+	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+		handler.ServeWs(hub, w, r)
+	})
+	go http.ListenAndServe(*model.Addr, nil)
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "myproject",
+		Title:  "CREATE Serial Monitor",
 		Width:  1024,
 		Height: 768,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
+		Menu:             app.ApplicationMenu(),
 		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
-		OnStartup:        app.startup,
-		OnShutdown:       app.shutdown,
+		OnStartup:        app.Startup,
+		OnDomReady:       app.Domready,
+		OnShutdown:       app.Shutdown,
+		OnBeforeClose:    app.BeforeClose,
 		Bind: []interface{}{
 			app,
-			&Hub{},
+			&model.Hub{},
 		},
 	})
 
