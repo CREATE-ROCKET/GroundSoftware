@@ -19,6 +19,7 @@ func main() {
 	// Create an instance of the app structure
 	app := handler.NewApp()
 
+	// websocket server
 	flag.Parse()
 	hub := handler.NewHub()
 	handler.HUB = hub
@@ -27,20 +28,22 @@ func main() {
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		handler.ServeWs(hub, w, r)
 	})
-
 	go http.ListenAndServe(*handler.Addr, nil)
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "myproject",
+		Title:  "CREATE Serial Monitor",
 		Width:  1024,
 		Height: 768,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
+		Menu:             app.ApplicationMenu(),
 		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
 		OnStartup:        app.Startup,
+		OnDomReady:       app.Domready,
 		OnShutdown:       app.Shutdown,
+		OnBeforeClose:    app.BeforeClose,
 		Bind: []interface{}{
 			app,
 			&handler.Hub{},

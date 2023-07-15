@@ -1,29 +1,30 @@
 <template>
   <main>
     <div id="monitor" class="monitor">
-      <dev id="log" class="log">
-        <div v-for="(message, index) in logMessages" :key="index">{{ message }}</div>
-      </dev>
-      <dev id="inputs" class="inputs">
-        <button class="btn" @click="serial($event)">Serial</button>
-        <button class="btn" @click="serial_stop($event)">Serial Stop</button>
+      <div id="inputs" class="inputs">
         <form id="form">
+          <div id="log" class="log">
+            <div v-for="(message, index) in logMessages" :key="index">{{ message }}</div>
+          </div>
           <button class="btn" @click="send($event)">Send</button>
           <input type="text" id="msg" size="64" autofocus />
+          <br>
+          <button class="btn" @click="serial($event)">Serial</button>
+          <button class="btn" @click="serial_stop($event)">Serial Stop</button>
         </form>
-      </dev> 
+      </div> 
     </div>
   </main>
 </template>
 
 <script setup>
 import { reactive, onMounted } from 'vue'
-import { SerialMonitor } from '../../wailsjs/go/handler/App'
+import { SerialStart } from '../../wailsjs/go/handler/App'
 import { SerialStop } from '../../wailsjs/go/handler/App'
 
 function serial(event) {
   event.preventDefault()
-  SerialMonitor()
+  SerialStart()
 }
 
 function serial_stop(event) {
