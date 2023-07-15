@@ -3,9 +3,15 @@
     <div id="monitor" class="monitor">
       <div id="inputs" class="inputs">
         <form id="form">
-          <div id="log" class="log">
-            <div v-for="(message, index) in logMessages" :key="index">{{ message }}</div>
-          </div>
+          <table>
+            <tbody>
+              <tr v-for="(message, index) in logMessages" :key="index">
+                <td>{{ message.time }}</td>
+                <td>{{ message.sender }}</td>
+                <td>{{ message.content }}</td>
+              </tr>
+            </tbody>
+          </table>
           <button class="btn" @click="send($event)">Send</button>
           <input type="text" id="msg" size="64" autofocus />
           <br>
@@ -51,17 +57,15 @@ function send(event) {
 let conn
 
 function scrollToBottom() {
-  // document.getElementById("log").scrollIntoView(false)
   document.getElementById("monitor").scrollIntoView(false)
   document.getElementById("inputs").scrollIntoView(false)
-  // document.scrollIntoView(false)
 }
 
 onMounted(() => {
   if (window.WebSocket) {
     conn = new WebSocket("ws://localhost:3007/ws")
     conn.onclose = function (evt) {
-      logMessages.push("Connection closed.")
+      logMessages.push({ time: "Connection closed.", sender: "", content: "" })
     }
 
     conn.onmessage = function (evt) {
@@ -77,9 +81,9 @@ onMounted(() => {
           if (separatorIndex2 !== -1) {
             const sender = message.substring(separatorIndex + 1, separatorIndex2) // 識別子を抽出
             const content = message.substring(separatorIndex2 + 1) // メッセージ本文を抽出
-            logMessages.push(`${time} From ${sender} ${content}`) // 送信者とメッセージを表示
+            logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
           } else {
-            logMessages.push(`${time} From Anonymous: ${content}`)
+            logMessages.push({ time, sender: "Anonymous", content })
           }
         } else {
           const separatorIndex2 = message.indexOf('::') // 識別子とメッセージの区切り位置を探す
@@ -87,20 +91,19 @@ onMounted(() => {
             const sender = message.substring(0, separatorIndex2) // 識別子を抽出
             const content = message.substring(separatorIndex2 + 1) // メッセージ本文を抽出
             const time = new Date().toLocaleString()
-            logMessages.push(`${time} From ${sender} ${content}`) // 送信者とメッセージを表示
+            logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
           } else {
-            logMessages.push(message)
+            logMessages.push({ time: message, sender: "", content: "" })
           }
         }
-      scrollToBottom()
       }
+      scrollToBottom()
     }
   } else {
-    logMessages.push("Your browser does not support WebSockets.")
+    logMessages.push({ time: "Your browser does not support WebSockets.", sender: "", content: "" })
   }
 })
 </script>
-
 
 <style scoped>
 .result {
