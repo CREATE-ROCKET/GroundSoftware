@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/Luftalian/Computer_software/handler"
+	"github.com/Luftalian/Computer_software/model"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -21,14 +22,14 @@ func main() {
 
 	// websocket server
 	flag.Parse()
-	hub := handler.NewHub()
-	handler.HUB = hub
-	go hub.Run()
-	http.HandleFunc("/", handler.ServeHome)
+	hub := model.NewHub()
+	model.HUB = hub
+	go handler.Run(hub)
+
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		handler.ServeWs(hub, w, r)
 	})
-	go http.ListenAndServe(*handler.Addr, nil)
+	go http.ListenAndServe(*model.Addr, nil)
 
 	// Create application with options
 	err := wails.Run(&options.App{
@@ -46,7 +47,7 @@ func main() {
 		OnBeforeClose:    app.BeforeClose,
 		Bind: []interface{}{
 			app,
-			&handler.Hub{},
+			&model.Hub{},
 		},
 	})
 

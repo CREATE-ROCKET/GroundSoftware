@@ -4,68 +4,31 @@ import (
 	"context"
 	"log"
 
-	"go.bug.st/serial"
+	"github.com/Luftalian/Computer_software/model"
 )
-
-var port serial.Port
 
 type Serial struct{}
 
-func serialInit() {
-	// Retrieve the port list
-	ports, err := serial.GetPortsList()
-	// ports2, err := enumerator.GetDetailedPortsList()
-	if err != nil {
-		log.Println(err)
-		HUB.SendError(err.Error())
-		return
-	}
-	if len(ports) == 0 {
-		HUB.SendText("Serial:" + "No serial ports found!")
-		return
-	}
-	// Open the first serial port detected at 115200bps N81
-	mode := &serial.Mode{
-		BaudRate: 115200,
-		Parity:   serial.NoParity,
-		DataBits: 8,
-		StopBits: serial.OneStopBit,
-	}
-	// for _, port := range ports2 {
-	// 	fmt.Printf("Found port: %s\n", port.Name)
-	// 	if port.IsUSB {
-	// 		log.Printf("   USB ID     %s:%s\n", port.VID, port.PID)
-	// 		log.Printf("   USB serial %s\n", port.SerialNumber)
-	// 	}
-	// }
-	port, err = serial.Open(ports[0], mode)
-	if err != nil {
-		log.Println(err)
-		HUB.SendError(err.Error())
-		return
-	}
-}
-
 func (a *App) SerialStart() {
 	a.ctx = context.WithValue(a.ctx, Serial{}, "start")
-	if port == nil {
-		serialInit()
+	if model.Port == nil {
+		model.SerialInit()
 	}
 
 	// Read and print the response
 	buff := make([]byte, 100)
 	for {
-		n, err := port.Read(buff)
+		n, err := model.Port.Read(buff)
 		if err != nil {
 			log.Println(err)
-			HUB.SendError(err.Error())
+			model.HUB.SendError(err.Error())
 			return
 		}
 		// if n == 0 {
 		// 	HUB.SendText("Serial:"+"\nEOF")
 		// 	break
 		// }
-		HUB.SendText("Serial::" + string(buff[:n]))
+		model.HUB.SendText("Serial::" + string(buff[:n]))
 		log.Print(buff[:n])
 		// If we receive a newline stop reading
 		// if strings.Contains(string(buff[:n]), "\n") {
@@ -82,14 +45,14 @@ func (a *App) SerialStop() {
 }
 
 func (a *App) SerialSend(text string) {
-	if port == nil {
-		serialInit()
+	if model.Port == nil {
+		model.SerialInit()
 	}
 	// Send string to the serial port
-	n, err := port.Write([]byte(text))
+	n, err := model.Port.Write([]byte(text))
 	if err != nil {
 		log.Println(err)
-		HUB.SendError(err.Error())
+		model.HUB.SendError(err.Error())
 	}
 	log.Printf("Sent %v bytes\n", n)
 }

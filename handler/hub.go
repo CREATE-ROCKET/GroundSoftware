@@ -4,64 +4,32 @@
 
 package handler
 
-import "log"
+import (
+	"log"
 
-// Hub maintains the set of active clients and broadcasts messages to the
-// clients.
-type Hub struct {
-	// Registered clients.
-	clients map[*Client]bool
+	"github.com/Luftalian/Computer_software/model"
+)
 
-	// Inbound messages from the clients.
-	broadcast chan []byte
-
-	// Register requests from the clients.
-	register chan *Client
-
-	// Unregister requests from clients.
-	unregister chan *Client
-}
-
-var HUB = &Hub{}
-
-func NewHub() *Hub {
-	return &Hub{
-		broadcast:  make(chan []byte),
-		register:   make(chan *Client),
-		unregister: make(chan *Client),
-		clients:    make(map[*Client]bool),
-	}
-}
-
-func (h *Hub) Run() {
+func Run(h *model.Hub) {
 	for {
 		select {
-		case client := <-h.register:
-			h.clients[client] = true
-		case client := <-h.unregister:
-			if _, ok := h.clients[client]; ok {
-				delete(h.clients, client)
-				close(client.send)
+		case client := <-h.Register:
+			h.Clients[client] = true
+		case client := <-h.Unregister:
+			if _, ok := h.Clients[client]; ok {
+				delete(h.Clients, client)
+				close(client.Send)
 			}
-		case message := <-h.broadcast:
+		case message := <-h.Broadcast:
 			log.Printf("broadcast: %v", string(message))
-			for client := range h.clients {
+			for client := range h.Clients {
 				select {
-				case client.send <- message:
+				case client.Send <- message:
 				default:
-					close(client.send)
-					delete(h.clients, client)
+					close(client.Send)
+					delete(h.Clients, client)
 				}
 			}
 		}
 	}
-}
-
-func (h *Hub) SendText(text string) {
-	h.broadcast <- []byte(text)
-	log.Print(text)
-}
-
-func (h *Hub) SendError(text string) {
-	h.SendText("ERROR: " + text)
 }
