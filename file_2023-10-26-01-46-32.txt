@@ -1,0 +1,122 @@
+2023-10-26 01:46:32 - Serial:Found ports:
+2023-10-26 01:46:32 - Serial:Opened port /dev/ttyUSB0
+2023-10-26 01:46:32 - broadcast: 2023/10/26 1:46:32; User:: sdf
+2023-10-26 01:46:34 - broadcast: 2023/10/26 1:46:34; User:: sdf
+2023-10-26 01:46:48 - Module: DstId=00 00 SrcId=11 11
+2023-10-26 01:46:49 - Module: 0F 5A 10 11 01 00 00 11 11 61 61 61 
+2023-10-26 01:46:54 - Module: 0F 5A 15 11 01 00 00 11 11 61 73 64 66 61 64 73 66 
+2023-10-26 01:47:29 - Module: DstId=asdf SrcId=adsf
+2023-10-26 01:47:30 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:31 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:31 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:32 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:32 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:32 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:32 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:36 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:36 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:36 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:47:36 - Module: 0F 5A 11 11 01 asdf adsf 61 73 64 66 
+2023-10-26 01:48:05 - Module: DstId=asdf SrcId=asdf
+2023-10-26 01:48:08 - broadcast: 2023/10/26 1:48:08; User:: saaa
+2023-10-26 01:48:11 - Module: 0F 5A 11 11 01 asdf asdf 73 61 61 61 
+2023-10-26 01:48:13 - Module: 0F 5A 11 11 01 asdf asdf 73 61 61 61 
+2023-10-26 01:48:14 - Module: 0F 5A 11 11 01 asdf asdf 73 61 61 61 
+2023-10-26 01:48:14 - Module: 0F 5A 11 11 01 asdf asdf 73 61 61 61 
+2023-10-26 01:48:14 - Module: 0F 5A 11 11 01 asdf asdf 73 61 61 61 
+2023-10-26 01:48:17 - Module: 0F 5A 11 11 01 asdf asdf 73 61 61 61 
+2023-10-26 01:48:17 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:17 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:18 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:18 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:18 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:18 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:19 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:19 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:19 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:19 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:19 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:19 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:20 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:20 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:21 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:21 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:21 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:21 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:42 - broadcast: 2023/10/26 1:48:42; User:: asdf
+2023-10-26 01:48:46 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:47 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:47 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:51 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:51 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:51 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:51 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:51 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:52 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:52 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:52 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:52 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:52 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:53 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:48:53 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:12 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:12 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:13 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:13 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:13 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:13 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:13 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:14 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:14 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:14 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:50:14 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:51:06 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:06 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:06 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:06 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:06 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:07 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:07 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:07 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:07 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:07 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:07 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:08 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:08 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:08 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:08 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:08 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:09 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:09 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:09 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:09 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:09 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:09 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:10 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:10 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:10 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:10 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:10 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:11 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:11 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:11 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:11 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:11 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:12 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:12 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:12 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:12 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:12 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:12 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:13 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:13 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:13 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:13 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:13 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:14 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:14 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:14 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:14 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:14 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:15 - Module: 0F 5A 0E 11 01 asdf asdf 73 
+2023-10-26 01:51:15 - Module: 0F 5A 0E 11 01 asdf asdf 73 

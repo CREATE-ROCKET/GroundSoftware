@@ -1,0 +1,18 @@
+2023-10-26 01:43:56 - ERROR: Please set DstId and SrcId
+2023-10-26 01:44:01 - Module: DstId=asdf SrcId=asdf
+2023-10-26 01:44:03 - Serial:Found ports:
+2023-10-26 01:44:03 - Serial:Opened port /dev/ttyUSB0
+2023-10-26 01:44:03 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:44:09 - Module: 0F 5A 0D 11 01 asdf asdf 
+2023-10-26 01:44:23 - broadcast: 2023/10/26 1:44:23; User:: asdf
+2023-10-26 01:44:24 - broadcast: 2023/10/26 1:44:24; User:: asdf
+2023-10-26 01:44:24 - broadcast: 2023/10/26 1:44:24; User:: asdf
+2023-10-26 01:44:28 - Module: DstId=asdf SrcId=asdf
+2023-10-26 01:44:29 - Module: 0F 5A 11 11 01 asdf asdf 61 73 64 66 
+2023-10-26 01:44:31 - Module: 0F 5A 11 11 01 asdf asdf 61 73 64 66 
+2023-10-26 01:44:38 - Module: 0F 5A 11 11 01 asdf asdf 61 73 64 66 
+2023-10-26 01:45:46 - Module: 0F 5A 18 11 01 asdf asdf 64 73 66 61 64 73 66 61 73 64 66 
+2023-10-26 01:45:53 - Module: DstId=adsf SrcId=sadf
+2023-10-26 01:45:55 - Module: 0F 5A 0D 11 01 adsf sadf 
+2023-10-26 01:46:00 - Module: 0F 5A 11 11 01 adsf sadf 73 73 73 73 
+2023-10-26 01:46:06 - Module: 0F 5A 15 11 01 adsf sadf 61 64 73 66 64 61 73 66 

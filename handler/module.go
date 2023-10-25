@@ -43,5 +43,6 @@ func (a *App) ModuleSend(text string) {
 	}
 
 	a.SerialSend(sendData)
+	model.HUB.SendText("Module: " + sendData)
 	// return sendData
 }

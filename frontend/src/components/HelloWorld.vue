@@ -50,8 +50,8 @@
         </form>
         <form>
           <div class="input-section">
-            <button @click="module_id" class="btn">Set DstId&SrcId</button>
-            <button @click="module_init" class="btn">Init Module</button>
+            <button @click="module_id($event)" class="btn">Set DstId and SrcId</button>
+            <button @click="module_init($event)" class="btn">Send Module Command</button>
           </div>
         </form>
       </div>
@@ -82,12 +82,20 @@ const sendMessage = ref('');
 const isChecked = ref(false);
 
 // module_start関数を更新し、データプロパティから引数を使用する
-function module_id() {
+function module_id(event) {
+  event.preventDefault()
   ModuleStart(dstId.value, srcId.value);
 }
 
-function module_init() {
+function module_init(event) {
+  event.preventDefault()
+  if (sendMessage.value == '') {
+    return
+  }
   ModuleSend(sendMessage.value);
+  if (isChecked.value) {
+    clearMessage()
+  }
 }
 
 const state = reactive({
@@ -138,6 +146,9 @@ let clientId = "User"
 
 function send(event) {
   event.preventDefault()
+  if (sendMessage.value == '') {
+    return
+  }
   // var input = document.getElementById("msg")
   // var message = input.value
   // var message = sendMessage.value
