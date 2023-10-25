@@ -10,7 +10,7 @@ var filename = ""
 func CreateFileWithTimestamp() error {
 	currentTime := time.Now()
 	timestamp := currentTime.Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
-	filename = "file_" + timestamp + ".txt"
+	filename = "log/file_" + timestamp + ".txt"
 
 	file, err := os.Create(filename)
 	if err != nil {
