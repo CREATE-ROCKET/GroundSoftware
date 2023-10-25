@@ -34,6 +34,11 @@ func NewHub() *Hub {
 }
 
 func (h *Hub) SendText(text string) {
+	err := AppendDataWithTimeToFile(text)
+	if err != nil {
+		h.Broadcast <- []byte(err.Error())
+		log.Println(err)
+	}
 	h.Broadcast <- []byte(text)
 	log.Print(text)
 }

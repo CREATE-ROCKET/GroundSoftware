@@ -1,7 +1,7 @@
 <template>
   <main>
-    <div id="monitor" class="monitor">
-      <div id="inputs" class="inputs">
+    <div class="container">
+      <div id="monitor" class="monitor">
         <div id="message_table">
           <table>
             <tbody>
@@ -14,33 +14,56 @@
           </table>
         </div>
       </div>
-      <div id="form">
+      <div id="inputs" class="inputs">
         <form>
-          <!-- <section id="buttons"> -->
-          <button class="btn" @click="send($event)">Send</button>
-          <input type="text" v-model="sendMessage"  id="msg" size="64" autofocus />
-          <br>
-          <button class="btn" @click="serial_start($event)">Serial</button>
-          <button class="btn" @click="serial_stop($event)">Serial Stop</button>
-          <!-- </section> -->
+          <div class="input-section">
+            <label for="msg" class="label">Message:</label>
+            <input type="text" v-model="sendMessage" id="msg" class="input-field" autofocus />
+            <!-- <input type="reset" value="Reset" id="msg" class="reset" autofocus /> -->
+            <input type="submit" id="msg" class="btn" @click="send($event)" value='Send' />
+            <label for="switch">
+              <input type="checkbox" id="switch" v-model="isChecked" />
+              Message Clear
+            </label>
+          </div>
         </form>
-        <!-- port selection -->
-        <select v-model="state.selected" @change="selected_port(state.selected)">
-          <option v-for="port in state.portList" :key="port">{{ port }}</option>
-        </select>
-      </div>
-      <div>
-        <!-- module start form -->
-        <input type="text" v-model="dstId" placeholder="Destination ID">
-        <input type="text" v-model="srcId" placeholder="Source ID">
-
-        <!-- ボタンを追加してmodule_start関数を呼び出す -->
-        <button @click="module_id">Set DstId&SrcId</button>
-        <button @click="module_init">Init Module</button>
+        <form>
+          <div class="input-section">
+            <button class="btn" @click="serial_start($event)">Serial Start</button>
+            <button class="btn" @click="serial_stop($event)">Serial Stop</button>
+          </div>
+        </form>
+        <form>
+          <div class="input-section">
+            <label for="port" class="label">Port:</label>
+            <select v-model="state.selected" @change="selected_port(state.selected)">
+              <option v-for="port in state.portList" :key="port">{{ port }}</option>
+            </select>
+            <button class="btn" @click="getPortList()">Port Select</button>
+          </div>
+        </form>
+        <form>
+          <div class="input-section">
+            <input type="text" v-model="dstId" class="input-field" placeholder="Destination ID">
+            <input type="text" v-model="srcId" class="input-field" placeholder="Source ID">
+          </div>
+        </form>
+        <form>
+          <div class="input-section">
+            <button @click="module_id" class="btn">Set DstId&SrcId</button>
+            <button @click="module_init" class="btn">Init Module</button>
+          </div>
+        </form>
       </div>
     </div>
   </main>
+  <footer>
+    <div class="footer">
+      <p>© 2023 <a href="https://github.com/CREATE-ROCKET">CREATE-ROCKET</a></p>
+    </div>
+  </footer>
 </template>
+
 
 <script setup>
 import { reactive, onMounted, ref } from 'vue'
@@ -56,6 +79,7 @@ import { ModuleSend } from '../../wailsjs/go/handler/App'
 const dstId = ref('');
 const srcId = ref('');
 const sendMessage = ref('');
+const isChecked = ref(false);
 
 // module_start関数を更新し、データプロパティから引数を使用する
 function module_id() {
@@ -114,23 +138,30 @@ let clientId = "User"
 
 function send(event) {
   event.preventDefault()
-  var input = document.getElementById("msg")
-  var message = input.value
-  if (message.slice(0, 2) != "//") {
-    SerialSend(message)
+  // var input = document.getElementById("msg")
+  // var message = input.value
+  // var message = sendMessage.value
+  if (sendMessage.value.slice(0, 2) != "//") {
+    SerialSend(sendMessage.value)
   }
   var timestamp = new Date().toLocaleString()
-  if (message) {
-    var messageWithClientId = `${timestamp}; ${clientId}:: ${message}`
+  if (sendMessage.value) {
+    var messageWithClientId = `${timestamp}; ${clientId}:: ${sendMessage.value}`
     conn.send(messageWithClientId)
-    input.value = ""
   }
+  if (isChecked.value) {
+    clearMessage()
+  }
+}
+
+function clearMessage() {
+  sendMessage.value = ""
 }
 
 let conn
 
 function scrollToBottom() {
-  const el = document.getElementById('message_table');
+  const el = document.getElementById('monitor');
   var getBottomPosition = el.scrollHeight - el.scrollTop;
   if (getBottomPosition - 150 > el.clientHeight) {
     return
@@ -189,122 +220,113 @@ onMounted(() => {
 </script>
 
 <style scoped>
-table {
-  width: auto;
-  table-layout: fixed;
-  word-wrap: break-word;
-  border-collapse: collapse;
-}
-
-table,
-th {
-  padding: 5px;
-  text-align: left;
-  /* min-width: 40vw; */
-}
-
-/* th.time {
-  min-width: 30vw;
-} */
-
-/* th.sender {
-  width: 10vw;
-}
-
-th.content {
-  width: 60vw;
-} */
-
-#message_table {
-  overflow: auto;
-  height: 80vh;
-  /* width: 100vw; */
-}
-
-/* #buttons {
-  width: 30vw;
-  bottom: 0;
-  margin: 0;
-} */
-
-/* .result {
-  height: 20px;
-  line-height: 20px;
-  margin: 1.5rem auto;
-} */
-
-.btn {
-  /* width: 60px; */
-  /* height: 30px; */
-  line-height: 30px;
-  border-radius: 30px;
-  border: none;
-  margin: 20 0 0 20px;
-  padding: 0 8px;
-  cursor: pointer;
-}
-
-.monitor {
+/* style.css */
+.container {
   display: flex;
-  flex-direction: column;
+  height: 95svh;
+  /* overflow-y: hidden; */
 }
 
-/* #log {
-  height: auto;
-  margin-bottom: 12px;
-} */
-
-#form {
-  margin-top: 0;
-  padding: 0;
-  /* width: 30vw; */
-  bottom: 0;
-  height: 17vh;
-  /* position: fixed; */
-  /* display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  display: flex; */
+#monitor {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 50%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 #inputs {
-  /* position: fixed; */
-  bottom: 0;
-  margin: 0;
-  height: 80vh;
-  width: 33.3vw;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
+  padding: 20px;
+  width: 50%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#message_table {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.time {
+  width: 20%;
+}
+
+.sender {
+  width: 20%;
+}
+
+.content {
+  width: 60%;
+}
+
+form {
   display: flex;
-  margin-bottom: 12px;
+  flex-direction: column;
+  margin-top: 5vh;
+}
+
+input[type=checkbox] {
+  transform: scale(2);
+  margin: 0 6px 0 0;
+}
+
+.input-section {
+  margin-bottom: 10px;
+}
+
+.input-field {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.label {
+  margin-bottom: 10px;
+}
+
+.reset {
+  padding: 10px 20px;
+  background-color: #ff675c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.reset:hover {
+  background-color: #fe1100;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .btn:hover {
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-  color: #333333;
+  background-color: #45a049;
 }
 
-.input {
-  border: none;
-  border-radius: 3px;
-  outline: none;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  background-color: rgba(240, 240, 240, 1);
-  -webkit-font-smoothing: antialiased;
-}
-
-.input:hover {
-  border: none;
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.input:focus {
-  border: none;
-  background-color: rgba(255, 255, 255, 1);
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  margin-left: 50%;
+  height: 5vh;
+  background-color: #f5f5f5;
+  text-align: center;
 }
 </style>
