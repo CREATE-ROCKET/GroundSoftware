@@ -59,7 +59,7 @@
   </main>
   <footer>
     <div class="footer">
-      <p>© 2023 <a href="https://github.com/CREATE-ROCKET">CREATE-ROCKET</a></p>
+      <p>© 2023 <a href="https://github.com/Luftalian">Luftalian</a></p>
     </div>
   </footer>
 </template>
