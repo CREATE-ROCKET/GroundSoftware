@@ -17,23 +17,86 @@
       <div id="form">
         <form>
           <!-- <section id="buttons"> -->
-            <button class="btn" @click="send($event)">Send</button>
-            <input type="text" id="msg" size="64" autofocus />
-            <br>
-            <button class="btn" @click="serial_start($event)">Serial</button>
-            <button class="btn" @click="serial_stop($event)">Serial Stop</button>
+          <button class="btn" @click="send($event)">Send</button>
+          <input type="text" v-model="sendMessage"  id="msg" size="64" autofocus />
+          <br>
+          <button class="btn" @click="serial_start($event)">Serial</button>
+          <button class="btn" @click="serial_stop($event)">Serial Stop</button>
           <!-- </section> -->
         </form>
-      </div> 
+        <!-- port selection -->
+        <select v-model="state.selected" @change="selected_port(state.selected)">
+          <option v-for="port in state.portList" :key="port">{{ port }}</option>
+        </select>
+      </div>
+      <div>
+        <!-- module start form -->
+        <input type="text" v-model="dstId" placeholder="Destination ID">
+        <input type="text" v-model="srcId" placeholder="Source ID">
+
+        <!-- ボタンを追加してmodule_start関数を呼び出す -->
+        <button @click="module_id">Set DstId&SrcId</button>
+        <button @click="module_init">Init Module</button>
+      </div>
     </div>
   </main>
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive, onMounted, ref } from 'vue'
 import { SerialStart } from '../../wailsjs/go/handler/App'
 import { SerialStop } from '../../wailsjs/go/handler/App'
 import { SerialSend } from '../../wailsjs/go/handler/App'
+import { PortList } from '../../wailsjs/go/handler/App'
+import { SelectedPort } from '../../wailsjs/go/handler/App'
+import { ModuleStart } from '../../wailsjs/go/handler/App'
+import { ModuleSend } from '../../wailsjs/go/handler/App'
+
+// reactiveなデータプロパティを追加
+const dstId = ref('');
+const srcId = ref('');
+const sendMessage = ref('');
+
+// module_start関数を更新し、データプロパティから引数を使用する
+function module_id() {
+  ModuleStart(dstId.value, srcId.value);
+}
+
+function module_init() {
+  ModuleSend(sendMessage.value);
+}
+
+const state = reactive({
+  portList: [],
+  selected: null,
+  error: null,
+});
+
+onMounted(async () => {
+  try {
+    const ports = await getPortList();
+    state.portList = ports;
+  } catch (error) {
+    state.error = error;
+  }
+});
+
+async function getPortList() {
+  try {
+    const portList = await PortList();
+    return portList;
+  } catch (error) {
+    throw new Error('Error fetching port list: ' + error);
+  }
+}
+
+const selected_port = async (port) => {
+  try {
+    await SelectedPort(port);
+  } catch (error) {
+    state.error = 'Error selecting port: ' + error;
+  }
+};
 
 function serial_start(event) {
   event.preventDefault()
@@ -68,8 +131,8 @@ let conn
 
 function scrollToBottom() {
   const el = document.getElementById('message_table');
-  var getBottomPosition  = el.scrollHeight - el.scrollTop;
-  if (getBottomPosition -150 > el.clientHeight) {
+  var getBottomPosition = el.scrollHeight - el.scrollTop;
+  if (getBottomPosition - 150 > el.clientHeight) {
     return
   }
   el.scrollTo(0, el.scrollHeight);
@@ -126,7 +189,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
 table {
   width: auto;
   table-layout: fixed;
@@ -134,7 +196,8 @@ table {
   border-collapse: collapse;
 }
 
-table,th {
+table,
+th {
   padding: 5px;
   text-align: left;
   /* min-width: 40vw; */

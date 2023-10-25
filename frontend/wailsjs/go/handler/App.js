@@ -6,6 +6,22 @@ export function ApplicationMenu() {
   return window['go']['handler']['App']['ApplicationMenu']();
 }
 
+export function ModuleSend(arg1) {
+  return window['go']['handler']['App']['ModuleSend'](arg1);
+}
+
+export function ModuleStart(arg1, arg2) {
+  return window['go']['handler']['App']['ModuleStart'](arg1, arg2);
+}
+
+export function PortList() {
+  return window['go']['handler']['App']['PortList']();
+}
+
+export function SelectedPort(arg1) {
+  return window['go']['handler']['App']['SelectedPort'](arg1);
+}
+
 export function SerialSend(arg1) {
   return window['go']['handler']['App']['SerialSend'](arg1);
 }

@@ -5,14 +5,22 @@ import (
 	"log"
 
 	"github.com/Luftalian/Computer_software/model"
+	"go.bug.st/serial"
 )
 
 type Serial struct{}
 
 func (a *App) SerialStart() {
 	a.ctx = context.WithValue(a.ctx, Serial{}, "start")
+	// var port string
 	if model.Port == nil {
-		model.SerialInit()
+		// port = model.SerialInit()
+		_, err := model.SerialInit("")
+		if err != nil {
+			log.Println(err)
+			// model.HUB.SendError(err.Error())
+			return
+		}
 	}
 
 	// Read and print the response
@@ -46,13 +54,41 @@ func (a *App) SerialStop() {
 
 func (a *App) SerialSend(text string) {
 	if model.Port == nil {
-		model.SerialInit()
+		_, err := model.SerialInit("")
+		if err != nil {
+			log.Println(err)
+			// model.HUB.SendError(err.Error())
+			return
+		}
 	}
 	// Send string to the serial port
 	n, err := model.Port.Write([]byte(text))
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
+		// if err ==  {
+
+		// }
 	}
 	log.Printf("Sent %v bytes\n", n)
+}
+
+func (a *App) PortList() []string {
+	// Retrieve the port list
+	ports, err := serial.GetPortsList()
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		return nil
+	}
+	if len(ports) == 0 {
+		model.HUB.SendText("Serial:" + "No serial ports found!")
+		return nil
+	}
+	log.Println("Found ports:", len(ports))
+	return ports
+}
+
+func (a *App) SelectedPort(port string) {
+	model.SerialInit(port)
 }
