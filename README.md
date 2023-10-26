@@ -23,6 +23,9 @@ This application is actively used by the [CREATE-ROCKET](https://github.com/CREA
 
 To install, download the application from [Release](https://github.com/CREATE-ROCKET/GroundSoftware/releases/latest)
 
+- `GroundSoftware-amd64-installer.exe` is for Windows.
+- `wailsTest` is for Linux.
+
 If you create a 'log' directory in the same directory as the application, log files will be generated within it. Each log file is unique to each application launch.
 
 ## How to Use
