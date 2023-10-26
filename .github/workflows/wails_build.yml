@@ -40,7 +40,7 @@ jobs:
         id: download
         with:
           name: |
-            Wails Build Linux wailsTest
+            'Wails Build Linux wailsTest'
             # bin-windows-latest
       - name: Release
         uses: softprops/action-gh-release@v1
