@@ -59,4 +59,4 @@ See the [LICENSE](./LICENSE) file for licensing details.
 
 ## Author
 
-Luftalian
+[Luftalian](https://github.com/Luftalian)
