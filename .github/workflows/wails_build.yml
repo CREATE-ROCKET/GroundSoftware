@@ -41,6 +41,8 @@ jobs:
       - run: |
           echo ${{ steps.download.outputs.download-path }}
           ls -la ${{ steps.download.outputs.download-path }}
+          sudo apt install tree
+          tree ${{ steps.download.outputs.download-path }}
       #   with:
       #     name: |
       #       'Wails Build Linux wailsTest'
