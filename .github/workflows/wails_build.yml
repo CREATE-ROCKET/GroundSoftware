@@ -24,10 +24,10 @@ jobs:
         with:
           build-name: ${{ matrix.build.name }}
           build-platform: ${{ matrix.build.platform }}
-      - uses: actions/upload-artifact@v3
-        with:
-          name: bin-${{ matrix.build.os }}
-          path: \*/bin/
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: bin-${{ matrix.build.os }}
+      #     path: \*/bin/
   release:
     needs: build
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
         id: download
         with:
           name: |
-            bin-ubuntu-latest
+            Wails Build Linux wailsTest
             # bin-windows-latest
       - name: Release
         uses: softprops/action-gh-release@v1
