@@ -1,6 +1,12 @@
-name: Wails build
+name: Wails build and Release
 
-on: [push, pull_request]
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -10,7 +16,7 @@ jobs:
         build: [
           {name: wailsTest, platform: linux/amd64, os: ubuntu-latest},
           {name: wailsTest, platform: windows/amd64, os: windows-latest},
-          {name: wailsTest, platform: darwin/universal, os: macos-latest}
+          # {name: wailsTest, platform: darwin/universal, os: macos-latest}
         ]
     runs-on: ${{ matrix.build.os }}
     steps:
@@ -20,4 +26,17 @@ jobs:
       - uses: dAppServer/wails-build-action@v2.2
         with:
           build-name: ${{ matrix.build.name }}
-          build-platform: ${{ matrix.build.platform }} 
+          build-platform: ${{ matrix.build.platform }}
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        id: download
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ steps.download.outputs.download-path }}
+          generate_release_notes: true

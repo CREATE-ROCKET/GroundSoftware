@@ -1,0 +1,9 @@
+2023-10-26 02:08:22 - Serial:Found ports:
+2023-10-26 02:08:22 - Serial:Opened port /dev/ttyUSB0
+2023-10-26 02:08:22 - broadcast: 2023/10/26 2:08:22; User:: asdfadf
+2023-10-26 02:08:23 - broadcast: 2023/10/26 2:08:23; User:: asdfadf
+2023-10-26 02:08:23 - broadcast: 2023/10/26 2:08:23; User:: asdfadf
+2023-10-26 02:08:23 - broadcast: 2023/10/26 2:08:23; User:: asdfadf
+2023-10-26 02:08:23 - broadcast: 2023/10/26 2:08:23; User:: asdfadf
+2023-10-26 02:08:23 - broadcast: 2023/10/26 2:08:23; User:: asdfadf
+2023-10-26 02:08:23 - broadcast: 2023/10/26 2:08:23; User:: asdfadf
