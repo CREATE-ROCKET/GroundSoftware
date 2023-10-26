@@ -34,11 +34,6 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         id: download
-      - run: |
-          echo ${{ steps.download.outputs.download-path }}
-          ls -la ${{ steps.download.outputs.download-path }}
-          sudo apt install tree
-          tree ${{ steps.download.outputs.download-path }}
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
