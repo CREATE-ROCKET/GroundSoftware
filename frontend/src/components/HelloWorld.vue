@@ -39,13 +39,13 @@
             <select v-model="state.selected" @change="selected_port(state.selected)">
               <option v-for="port in state.portList" :key="port">{{ port }}</option>
             </select>
-            <button class="btn" @click="getPortList()">Port Select</button>
+            <button class="btn" @click="getPortList()">Get Port List</button>
           </div>
         </form>
         <form>
           <div class="input-section">
-            <input type="text" v-model="dstId" class="input-field" placeholder="Destination ID">
-            <input type="text" v-model="srcId" class="input-field" placeholder="Source ID">
+            <input type="text" v-model="dstId" class="input-field" placeholder="Dst ID">
+            <input type="text" v-model="srcId" class="input-field" placeholder="Src ID">
           </div>
         </form>
         <form>
@@ -57,11 +57,7 @@
       </div>
     </div>
   </main>
-  <footer>
-    <div class="footer">
-      <p>© 2023 <a href="https://github.com/Luftalian">Luftalian</a></p>
-    </div>
-  </footer>
+  <Footer />
 </template>
 
 
@@ -74,6 +70,7 @@ import { PortList } from '../../wailsjs/go/handler/App'
 import { SelectedPort } from '../../wailsjs/go/handler/App'
 import { ModuleStart } from '../../wailsjs/go/handler/App'
 import { ModuleSend } from '../../wailsjs/go/handler/App'
+import Footer from './Footer.vue';
 
 // reactiveなデータプロパティを追加
 const dstId = ref('');
@@ -230,114 +227,5 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-/* style.css */
-.container {
-  display: flex;
-  height: 95svh;
-  /* overflow-y: hidden; */
-}
 
-#monitor {
-  border: 1px solid #ccc;
-  padding: 20px;
-  width: 50%;
-  height: 100%;
-  overflow-y: auto;
-}
-
-#inputs {
-  padding: 20px;
-  width: 50%;
-  height: 100%;
-  overflow-y: auto;
-}
-
-#message_table {
-  width: 100%;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.time {
-  width: 20%;
-}
-
-.sender {
-  width: 20%;
-}
-
-.content {
-  width: 60%;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 5vh;
-}
-
-input[type=checkbox] {
-  transform: scale(2);
-  margin: 0 6px 0 0;
-}
-
-.input-section {
-  margin-bottom: 10px;
-}
-
-.input-field {
-  margin-bottom: 10px;
-  padding: 8px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.label {
-  margin-bottom: 10px;
-}
-
-.reset {
-  padding: 10px 20px;
-  background-color: #ff675c;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.reset:hover {
-  background-color: #fe1100;
-}
-
-.btn {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.btn:hover {
-  background-color: #45a049;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 50%;
-  margin-left: 50%;
-  height: 5vh;
-  background-color: #f5f5f5;
-  text-align: center;
-}
-</style>
+<style src="../style.css"></style>
