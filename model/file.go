@@ -12,6 +12,19 @@ func CreateFileWithTimestamp() error {
 	timestamp := currentTime.Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
 	filename = "log/file_" + timestamp + ".txt"
 
+	dirPath := "log"
+
+	// ディレクトリの存在を確認
+	if _, err := os.Stat(dirPath); err == nil {
+	} else if os.IsNotExist(err) {
+		err = os.Mkdir(dirPath, 0755)
+		if err != nil {
+			return err
+		}
+	} else {
+		return err
+	}
+
 	file, err := os.Create(filename)
 	if err != nil {
 		return err

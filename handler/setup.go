@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"log"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -10,6 +11,8 @@ import (
 // so we can call the runtime methods
 func (a *App) Startup(ctx context.Context) {
 	a.ctx = ctx
+	log.Print("-------------------------------------------sssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
+	a.ModuleEnv()
 }
 
 func (a *App) Shutdown(ctx context.Context) {

@@ -1,0 +1,7 @@
+2023-11-11 00:30:00 - ERROR: Please set all config
+2023-11-11 00:30:00 - Serial:No serial ports found!
+2023-11-11 00:30:02 - broadcast: 2023/11/11 0:30:02; User:: a
+2023-11-11 00:30:02 - Serial:No serial ports found!
+2023-11-11 00:30:04 - ERROR: Please set all config
+2023-11-11 00:30:10 - ERROR: Please set all config
+2023-11-11 00:30:30 - Serial:No serial ports found!

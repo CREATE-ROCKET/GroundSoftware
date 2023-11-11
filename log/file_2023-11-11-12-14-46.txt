@@ -1,0 +1,8 @@
+2023-11-11 12:14:46 - Serial:Found ports:
+2023-11-11 12:14:46 - Serial:Opened port /dev/ttyUSB1
+2023-11-11 12:14:46 - Module: 0F5A111100FFFFFFFFFFFFFFFF031A1005
+2023-11-11 12:14:49 - Serial:Found ports:
+2023-11-11 12:14:49 - Serial:Opened port /dev/ttyUSB1
+2023-11-11 12:15:07 - Module: 0F5A111101FFFFFFFFFFFFFFFF031A1005
+2023-11-11 12:15:07 - Serial::ZÂ ±ÿÿÿÿ
+2023-11-11 12:15:37 - ERROR: Port has been closed

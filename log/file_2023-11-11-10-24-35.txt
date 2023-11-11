@@ -1,0 +1,7 @@
+2023-11-11 10:24:35 - Serial:Found ports:
+2023-11-11 10:24:35 - Serial:Opened port /dev/ttyUSB0
+2023-11-11 10:24:35 - Module: 0F 5A 17 11 0 00 00 00 00 FF FF FF FF 33 20 31 41 20 31 30 20 30 35 
+2023-11-11 10:24:35 - Module: 0F 5A 17 11 1 00 00 00 00 FF FF FF FF 3 1A 10 05
+2023-11-11 10:24:38 - Serial:Found ports:
+2023-11-11 10:24:38 - ERROR: Serial port busy
+2023-11-11 10:24:38 - /dev/ttyUSB2

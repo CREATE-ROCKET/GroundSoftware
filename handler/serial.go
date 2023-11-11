@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"log"
+	"strconv"
 
 	"github.com/Luftalian/Computer_software/model"
 	"go.bug.st/serial"
@@ -36,7 +37,10 @@ func (a *App) SerialStart() {
 		// 	HUB.SendText("Serial:"+"\nEOF")
 		// 	break
 		// }
-		model.HUB.SendText("Serial::" + string(buff[:n]))
+		log.Println("oooooooooooooooooooooooooooo")
+		log.Println(buff)
+
+		model.HUB.SendText("Serial::" + byteArrayToString(buff[:n]))
 		log.Print(buff[:n])
 		// If we receive a newline stop reading
 		// if strings.Contains(string(buff[:n]), "\n") {
@@ -52,7 +56,7 @@ func (a *App) SerialStop() {
 	a.ctx = context.WithValue(a.ctx, Serial{}, "stop")
 }
 
-func (a *App) SerialSend(text string) {
+func (a *App) SerialTextSend(text string) {
 	if model.Port == nil {
 		_, err := model.SerialInit("")
 		if err != nil {
@@ -63,6 +67,27 @@ func (a *App) SerialSend(text string) {
 	}
 	// Send string to the serial port
 	n, err := model.Port.Write([]byte(text))
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		// if err ==  {
+
+		// }
+	}
+	log.Printf("Sent %v bytes\n", n)
+}
+
+func (a *App) SerialByteSend(byteDate []byte) {
+	if model.Port == nil {
+		_, err := model.SerialInit("")
+		if err != nil {
+			log.Println(err)
+			// model.HUB.SendError(err.Error())
+			return
+		}
+	}
+	// Send string to the serial port
+	n, err := model.Port.Write(byteDate)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
@@ -91,4 +116,16 @@ func (a *App) PortList() []string {
 
 func (a *App) SelectedPort(port string) {
 	model.SerialInit(port)
+}
+
+func byteArrayToString(bytes []byte) string {
+	result := "["
+	for i, b := range bytes {
+		result += strconv.Itoa(int(b))
+		if i < len(bytes)-1 {
+			result += " "
+		}
+	}
+	result += "]"
+	return result
 }

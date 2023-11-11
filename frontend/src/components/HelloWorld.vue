@@ -51,7 +51,8 @@
         <form>
           <div class="input-section">
             <button @click="module_id($event)" class="btn">Set DstId and SrcId</button>
-            <button @click="module_init($event)" class="btn">Send Module Command</button>
+            <button @click="module_send($event)" class="btn">Send Module Command</button>
+            <button @click="module_config($event)" class="btn">Set Module From Config File</button>
           </div>
         </form>
       </div>
@@ -65,11 +66,12 @@
 import { reactive, onMounted, ref } from 'vue'
 import { SerialStart } from '../../wailsjs/go/handler/App'
 import { SerialStop } from '../../wailsjs/go/handler/App'
-import { SerialSend } from '../../wailsjs/go/handler/App'
+import { SerialTextSend } from '../../wailsjs/go/handler/App'
 import { PortList } from '../../wailsjs/go/handler/App'
 import { SelectedPort } from '../../wailsjs/go/handler/App'
 import { ModuleStart } from '../../wailsjs/go/handler/App'
 import { ModuleSend } from '../../wailsjs/go/handler/App'
+import { ModuleEnv } from '../../wailsjs/go/handler/App'
 import Footer from './Footer.vue';
 
 // reactiveなデータプロパティを追加
@@ -84,7 +86,7 @@ function module_id(event) {
   ModuleStart(dstId.value, srcId.value);
 }
 
-function module_init(event) {
+function module_send(event) {
   event.preventDefault()
   if (sendMessage.value == '') {
     return
@@ -93,6 +95,11 @@ function module_init(event) {
   if (isChecked.value) {
     clearMessage()
   }
+}
+
+function module_config(event) {
+  event.preventDefault()
+  ModuleEnv();
 }
 
 const state = reactive({
@@ -150,7 +157,7 @@ function send(event) {
   // var message = input.value
   // var message = sendMessage.value
   if (sendMessage.value.slice(0, 2) != "//") {
-    SerialSend(sendMessage.value)
+    SerialTextSend(sendMessage.value)
   }
   var timestamp = new Date().toLocaleString()
   if (sendMessage.value) {

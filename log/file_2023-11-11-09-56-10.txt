@@ -1,0 +1,13 @@
+2023-11-11 09:56:10 - Serial:Found ports:
+2023-11-11 09:56:10 - Serial:Opened port /dev/ttyUSB0
+2023-11-11 09:56:10 - Module: 0F 5A 17 11 0 00 00 00 00 FF FF FF FF 33 20 31 41 20 31 30 20 30 35 
+2023-11-11 09:56:13 - Serial:Found ports:
+2023-11-11 09:56:13 - Serial:Opened port /dev/ttyUSB1
+2023-11-11 09:56:19 - broadcast: 2023/11/11 9:56:19; User:: a
+2023-11-11 09:56:20 - broadcast: 2023/11/11 9:56:20; User:: a
+2023-11-11 09:57:39 - Serial:Found ports:
+2023-11-11 09:57:39 - Serial:Opened port /dev/ttyUSB0
+2023-11-11 09:57:41 - Serial:Found ports:
+2023-11-11 09:57:41 - ERROR: no such file or directory
+2023-11-11 09:57:41 - /dev/ttyUSB1
+2023-11-11 09:57:44 - broadcast: 2023/11/11 9:57:44; User:: a

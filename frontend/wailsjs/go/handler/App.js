@@ -6,12 +6,20 @@ export function ApplicationMenu() {
   return window['go']['handler']['App']['ApplicationMenu']();
 }
 
+export function ModuleEnv() {
+  return window['go']['handler']['App']['ModuleEnv']();
+}
+
 export function ModuleSend(arg1) {
   return window['go']['handler']['App']['ModuleSend'](arg1);
 }
 
 export function ModuleStart(arg1, arg2) {
   return window['go']['handler']['App']['ModuleStart'](arg1, arg2);
+}
+
+export function ModuleStyleSerialSend(arg1) {
+  return window['go']['handler']['App']['ModuleStyleSerialSend'](arg1);
 }
 
 export function PortList() {
@@ -22,8 +30,8 @@ export function SelectedPort(arg1) {
   return window['go']['handler']['App']['SelectedPort'](arg1);
 }
 
-export function SerialSend(arg1) {
-  return window['go']['handler']['App']['SerialSend'](arg1);
+export function SerialByteSend(arg1) {
+  return window['go']['handler']['App']['SerialByteSend'](arg1);
 }
 
 export function SerialStart() {
@@ -32,4 +40,8 @@ export function SerialStart() {
 
 export function SerialStop() {
   return window['go']['handler']['App']['SerialStop']();
+}
+
+export function SerialTextSend(arg1) {
+  return window['go']['handler']['App']['SerialTextSend'](arg1);
 }

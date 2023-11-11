@@ -1,0 +1,11 @@
+2023-11-11 11:38:23 - Serial:No serial ports found!
+2023-11-11 11:38:23 - Module: 0F5A11110000000000FFFFFFFF031A1005
+2023-11-11 11:38:23 - Serial:No serial ports found!
+2023-11-11 11:38:42 - Serial:Found ports:
+2023-11-11 11:38:42 - Serial:Opened port /dev/ttyUSB0
+2023-11-11 12:08:56 - Serial:Found ports:
+2023-11-11 12:08:56 - Serial:Opened port /dev/ttyUSB1
+2023-11-11 12:09:03 - Serial:Found ports:
+2023-11-11 12:09:03 - Serial:Opened port /dev/ttyUSB1
+2023-11-11 12:14:01 - Module: 0F5A111101FFFFFFFFFFFFFFFF031A1005
+2023-11-11 12:14:34 - Serial::ZÂ ±ÿÿÿÿ

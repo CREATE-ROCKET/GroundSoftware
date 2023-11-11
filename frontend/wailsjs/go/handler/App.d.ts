@@ -4,16 +4,22 @@ import {menu} from '../models';
 
 export function ApplicationMenu():Promise<menu.Menu>;
 
+export function ModuleEnv():Promise<void>;
+
 export function ModuleSend(arg1:string):Promise<void>;
 
 export function ModuleStart(arg1:string,arg2:string):Promise<void>;
+
+export function ModuleStyleSerialSend(arg1:Array<number>):Promise<void>;
 
 export function PortList():Promise<Array<string>>;
 
 export function SelectedPort(arg1:string):Promise<void>;
 
-export function SerialSend(arg1:string):Promise<void>;
+export function SerialByteSend(arg1:Array<number>):Promise<void>;
 
 export function SerialStart():Promise<void>;
 
 export function SerialStop():Promise<void>;
+
+export function SerialTextSend(arg1:string):Promise<void>;

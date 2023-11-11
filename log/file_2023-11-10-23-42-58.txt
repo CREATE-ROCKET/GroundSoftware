@@ -1,0 +1,8 @@
+2023-11-10 23:42:58 - Serial:No serial ports found!
+2023-11-10 23:42:58 - Module: 0F 5A 18 11 0 00 00 30 30 20 30 30 20 30 30 20 30 30 
+2023-11-10 23:42:58 - Serial:No serial ports found!
+2023-11-10 23:43:08 - Serial:No serial ports found!
+2023-11-10 23:43:08 - Module: 0F 5A 18 11 1 00 00 30 30 20 30 30 20 30 30 20 30 30 
+2023-11-10 23:43:21 - Serial:No serial ports found!
+2023-11-10 23:43:21 - Module: 0F 5A 18 11 2 00 00 30 30 20 30 30 20 30 30 20 30 30 
+2023-11-10 23:44:46 - Serial:No serial ports found!

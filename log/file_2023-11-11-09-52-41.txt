@@ -1,0 +1,6 @@
+2023-11-11 09:52:41 - Serial:Found ports:
+2023-11-11 09:52:41 - Serial:Opened port /dev/ttyUSB1
+2023-11-11 09:52:41 - Module: 0F 5A 17 11 0 00 00 00 00 FF FF FF FF 33 20 31 41 20 31 30 20 30 35 
+2023-11-11 09:52:47 - Serial:Found ports:
+2023-11-11 09:52:47 - Serial:Opened port /dev/ttyUSB1
+2023-11-11 09:52:50 - broadcast: 2023/11/11 9:52:50; User:: a

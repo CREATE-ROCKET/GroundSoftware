@@ -1,0 +1,2 @@
+2023-11-10 23:05:23 - Serial:No serial ports found!
+2023-11-10 23:05:27 - Serial:No serial ports found!
