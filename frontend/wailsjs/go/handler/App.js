@@ -6,6 +6,10 @@ export function ApplicationMenu() {
   return window['go']['handler']['App']['ApplicationMenu']();
 }
 
+export function LpsAndTimeToFile(arg1, arg2) {
+  return window['go']['handler']['App']['LpsAndTimeToFile'](arg1, arg2);
+}
+
 export function ModuleEnv() {
   return window['go']['handler']['App']['ModuleEnv']();
 }
@@ -22,8 +26,24 @@ export function ModuleStyleSerialSend(arg1) {
   return window['go']['handler']['App']['ModuleStyleSerialSend'](arg1);
 }
 
+export function OpenAndTimeToFile(arg1, arg2) {
+  return window['go']['handler']['App']['OpenAndTimeToFile'](arg1, arg2);
+}
+
+export function ParseData(arg1) {
+  return window['go']['handler']['App']['ParseData'](arg1);
+}
+
 export function PortList() {
   return window['go']['handler']['App']['PortList']();
+}
+
+export function QuatAndTimeToFile(arg1, arg2) {
+  return window['go']['handler']['App']['QuatAndTimeToFile'](arg1, arg2);
+}
+
+export function ReceiveData(arg1) {
+  return window['go']['handler']['App']['ReceiveData'](arg1);
 }
 
 export function SelectedPort(arg1) {
@@ -44,4 +64,8 @@ export function SerialStop() {
 
 export function SerialTextSend(arg1) {
   return window['go']['handler']['App']['SerialTextSend'](arg1);
+}
+
+export function VoltageToFile(arg1) {
+  return window['go']['handler']['App']['VoltageToFile'](arg1);
 }
