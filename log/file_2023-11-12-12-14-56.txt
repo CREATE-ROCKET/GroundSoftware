@@ -1,0 +1,13 @@
+2023-11-12 12:14:56 - Serial:Found ports:
+2023-11-12 12:14:56 - Serial:Opened port /dev/ttyUSB0
+2023-11-12 12:14:56 - Module: 0F5A112185FFFFFFFFFFFFFFFF
+2023-11-12 12:14:59 - Serial:Found ports:
+2023-11-12 12:14:59 - Serial:Opened port /dev/ttyUSB0
+2023-11-12 12:15:01 - Serial::[32 50 48 177]
+2023-11-12 12:15:22 - ERROR: Port has been closed
+2023-11-12 12:15:22 - ERROR: Port has been closed
+2023-11-12 12:15:22 - Serial:Found ports:
+2023-11-12 12:15:22 - Serial:Opened port /dev/ttyUSB0
+2023-11-12 12:15:23 - Serial::[82 79 78 95 82 69 83 69 252]
+2023-11-12 12:15:32 - Module: 0F5A112186FFFFFFFFFFFFFFFF
+2023-11-12 12:15:38 - broadcast: 2023/11/12 12:15:38; User:: a

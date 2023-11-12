@@ -18,7 +18,7 @@ import (
 // SrcID 		4Byte 	送信元デバイス 			FF FF FF FF
 // Parameter 	nByte(n=0～241) 				01
 
-var DstId = "00000000"
+var DstId = "FFFFFFFF"
 var DstIdFlag = false
 var SrcId = "FFFFFFFF"
 var SrcIdFlag = false
