@@ -1,0 +1,99 @@
+2023-11-12 21:49:36 - Serial:Found ports:
+2023-11-12 21:49:36 - Serial:Opened port /dev/ttyUSB0
+2023-11-12 21:49:36 - Module: 0F5A112185FFFFFFFFFFFFFFFF
+2023-11-12 21:49:39 - Serial:Found ports:
+2023-11-12 21:49:39 - Serial:Opened port /dev/ttyUSB1
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - Serial:Found ports:
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - ERROR: Port has been closed
+2023-11-12 21:49:42 - Serial:Opened port /dev/ttyUSB0
+2023-11-12 21:49:42 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:42 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:43 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:43 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:44 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:44 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:45 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:45 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:46 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:46 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:47 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:47 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:48 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:48 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:49 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:49 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:50 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:50 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:51 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:51 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:52 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:52 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:55 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:55 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:56 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:56 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:57 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:57 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:58 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:58 - Voltage:: 65535,65535,65535,
+
+2023-11-12 21:49:59 - Voltage:: 0,0,0,
+
+2023-11-12 21:49:59 - Voltage:: 65535,65535,65535,
+
