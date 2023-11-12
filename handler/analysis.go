@@ -65,12 +65,14 @@ func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
 }
 
 func (a *App) VoltageToFile(voltageData []byte) {
-	voltage := binary.LittleEndian.Uint16(voltageData[0:2])
+	voltage1 := binary.LittleEndian.Uint16(voltageData[0:3])
+	voltage2 := binary.LittleEndian.Uint16(voltageData[3:6])
+	voltage3 := binary.LittleEndian.Uint16(voltageData[6:9])
 
-	err := model.AppendStringToFile(fmt.Sprintf("%d,\n", voltage), a.voltFileName)
+	err := model.AppendStringToFile(fmt.Sprintf("%d,%d,%d,\n", voltage1, voltage2, voltage3), a.voltFileName)
 	if err != nil {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Voltage:: %d,\n", voltage))
+	model.HUB.SendText(fmt.Sprintf("Voltage:: %d,%d,%d,\n", voltage1, voltage2, voltage3))
 }
