@@ -57,9 +57,20 @@
         </form>
       </div>
     </div>
+    <Chart />
   </main>
   <Footer />
 </template>
+
+<script>
+import Chart from './BarChart.vue';
+
+export default {
+  components: {
+    Chart,
+  },
+}
+</script>
 
 
 <script setup>
@@ -73,6 +84,8 @@ import { ModuleStart } from '../../wailsjs/go/handler/App'
 import { ModuleSend } from '../../wailsjs/go/handler/App'
 import { ModuleEnv } from '../../wailsjs/go/handler/App'
 import Footer from './Footer.vue';
+
+import Chart from './BarChart.vue';
 
 // reactiveなデータプロパティを追加
 const dstId = ref('');
