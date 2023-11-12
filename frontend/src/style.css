@@ -112,3 +112,15 @@ footer {
 body {
   background-color: #fff;
 }
+
+.chart-section {
+  display: flex;
+  flex-wrap: nowrap; /* 横に並べたときに折り返さないようにする */
+  overflow-x: auto; /* コンテンツが画面に収まらない場合に横スクロールを有効にする */
+  margin-top: 10%;
+  width: 100vw;
+}
+
+#canvas {
+  width: 33vw;
+}

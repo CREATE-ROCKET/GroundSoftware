@@ -1,0 +1,237 @@
+2023-11-12 23:28:14 - Serial:Found ports:
+2023-11-12 23:28:14 - Serial:Opened port /dev/ttyUSB0
+2023-11-12 23:28:14 - Module: 0F5A112185FFFFFFFFFFFFFFFF
+2023-11-12 23:28:18 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:18 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:18 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:18 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:18 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:18 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:18 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:18 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:19 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:19 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:20 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:20 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:21 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:21 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:22 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:22 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:24 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:24 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:25 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:25 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:26 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:26 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:27 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:27 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:28 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:28 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:29 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:29 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:30 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:30 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:31 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:31 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:32 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:32 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:33 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:33 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:34 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:34 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:35 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:35 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:36 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:36 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:37 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:37 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:38 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:38 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:39 - Voltage:: 0,0,0,
+
+2023-11-12 23:28:39 - Voltage:: 65535,65535,65535,
+
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - Serial:Found ports:
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - ERROR: Port has been closed
+2023-11-12 23:28:40 - Serial:Opened port /dev/ttyUSB1
+2023-11-12 23:28:59 - ERROR: Port has been closed
+2023-11-12 23:28:59 - ERROR: Port has been closed
+2023-11-12 23:28:59 - ERROR: Port has been closed
+2023-11-12 23:28:59 - ERROR: Port has been closed
+2023-11-12 23:29:01 - Serial:Found ports:
+2023-11-12 23:29:01 - Serial:Opened port /dev/ttyUSB0
+2023-11-12 23:29:10 - Module: DstId= SrcId=
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - Serial:Found ports:
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - ERROR: Port has been closed
+2023-11-12 23:29:21 - Serial:Opened port /dev/ttyUSB0
