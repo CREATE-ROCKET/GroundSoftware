@@ -23,6 +23,10 @@ func (a *App) SerialStart() {
 		}
 	}
 
+	receivedData := make(chan []byte)
+	// バックグラウンドでデータを受信し解析するゴルーチン
+	go a.ReceiveData(receivedData)
+
 	// Read and print the response
 	buff := make([]byte, 100)
 	for {
@@ -30,18 +34,36 @@ func (a *App) SerialStart() {
 		if err != nil {
 			log.Println(err)
 			model.HUB.SendError(err.Error())
-			return
+			// return
 		}
+		// model.HUB.SendText("Serial::" + byteArrayToString(buff[:n]))
+
 		// if n == 0 {
 		// 	HUB.SendText("Serial:"+"\nEOF")
 		// 	break
 		// }
-		model.HUB.SendText("Serial::" + string(buff[:n]))
-		log.Print(buff[:n])
+		// log.Println("oooooooooooooooooooooooooooo")
+		// log.Println(buff)
+
+		// jjj := findData(buff[:n])
+		// parseData(jjj)
+		// model.HUB.SendText("Serial::" + byteArrayToString(jjj))
+		// log.Print(buff[:n])
+
 		// If we receive a newline stop reading
 		// if strings.Contains(string(buff[:n]), "\n") {
 		// 	break
 		// }
+
+		receivedData <- buff[:n]
+		// 生データの保存
+		err = model.AppendToFile(buff[:n], a.rawFileName)
+		if err != nil {
+			log.Println(err)
+			model.HUB.SendError(err.Error())
+			// return
+		}
+
 		if a.ctx.Value(Serial{}) == "stop" {
 			break
 		}
@@ -52,7 +74,7 @@ func (a *App) SerialStop() {
 	a.ctx = context.WithValue(a.ctx, Serial{}, "stop")
 }
 
-func (a *App) SerialSend(text string) {
+func (a *App) SerialTextSend(text string) {
 	if model.Port == nil {
 		_, err := model.SerialInit("")
 		if err != nil {
@@ -63,6 +85,27 @@ func (a *App) SerialSend(text string) {
 	}
 	// Send string to the serial port
 	n, err := model.Port.Write([]byte(text))
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		// if err ==  {
+
+		// }
+	}
+	log.Printf("Sent %v bytes\n", n)
+}
+
+func (a *App) SerialByteSend(byteDate []byte) {
+	if model.Port == nil {
+		_, err := model.SerialInit("")
+		if err != nil {
+			log.Println(err)
+			// model.HUB.SendError(err.Error())
+			return
+		}
+	}
+	// Send string to the serial port
+	n, err := model.Port.Write(byteDate)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())

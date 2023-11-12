@@ -1,0 +1,5 @@
+2023-11-11 12:16:56 - Serial:No serial ports found!
+2023-11-11 12:16:56 - Module: 0F5A111100FFFFFFFFFFFFFFFF031A1005
+2023-11-11 12:16:56 - Serial:No serial ports found!
+2023-11-11 12:16:59 - Serial:No serial ports found!
+2023-11-11 12:16:59 - Serial:No serial ports found!

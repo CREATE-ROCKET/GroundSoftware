@@ -1,0 +1,1 @@
+2023-11-11 11:01:54 - ERROR: encoding/hex: invalid byte: U+0073 's'
