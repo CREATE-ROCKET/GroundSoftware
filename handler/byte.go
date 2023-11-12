@@ -132,12 +132,12 @@ func (a *App) ParseData(data []byte) {
 	if header != 0x40 || data[0] != 0xb7 {
 		if header == 0x50 && data[0] != 0x17 {
 			// 電圧用のコード
-			offset := 11
+			offset := 11 + 1
 			model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+2]))
 			a.VoltageToFile(data[offset : offset+2])
 			return
 		} else if header == 0x51 && data[0] != 0x17 {
-			offset := 11
+			offset := 11 + 1
 			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+2]))
 			a.VoltageToFile(data[offset : offset+2])
 			return
@@ -145,7 +145,7 @@ func (a *App) ParseData(data []byte) {
 		return
 	}
 
-	offset := 11
+	offset := 11 + 1
 	for i := 0; i < 8; i++ {
 		time := data[offset : offset+4]
 		offset += 4

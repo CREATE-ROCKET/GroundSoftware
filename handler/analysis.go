@@ -26,7 +26,8 @@ func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Quat:: %d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4))
+	model.HUB.SendText(fmt.Sprintf("Quat:: %d,%s\n", time, byteArrayToString(quatData[:16])))
+	// model.AppendStringToFile(fmt.Sprintf("%s,%s\n", byteArrayToString(timeData), byteArrayToString(quatData[:16])), a.quatFileName)
 }
 
 func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
@@ -38,7 +39,8 @@ func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Lps:: %d,%d,\n", time, lps))
+	model.HUB.SendText(fmt.Sprintf("Lps:: %s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:2])))
+	// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:3])), a.lpsFileName)
 }
 
 func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
@@ -58,7 +60,8 @@ func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Open:: %d,%d,\n", time, open))
+	model.HUB.SendText(fmt.Sprintf("Open:: %d,%s,\n", time, byteArrayToString(openData[:2])))
+	// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(openData[:2])), a.openFileName)
 }
 
 func (a *App) VoltageToFile(voltageData []byte) {
