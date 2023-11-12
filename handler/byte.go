@@ -130,13 +130,13 @@ func (a *App) ParseData(data []byte) {
 	header := data[11]
 	fmt.Printf("Header: 0x%02x\n", header)
 	if header != 0x40 || data[0] != 0xb7 {
-		if header == 0x50 && data[0] != 0x17 {
+		if header == 0x50 && data[0] == 0x17 {
 			// 電圧用のコード
 			offset := 11 + 1
 			model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+2]))
 			a.VoltageToFile(data[offset : offset+2])
 			return
-		} else if header == 0x51 && data[0] != 0x17 {
+		} else if header == 0x51 && data[0] == 0x17 {
 			offset := 11 + 1
 			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+2]))
 			a.VoltageToFile(data[offset : offset+2])
