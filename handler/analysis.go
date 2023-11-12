@@ -11,15 +11,15 @@ import (
 
 func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 	time := binary.LittleEndian.Uint32(timeData)
-	quat1 := binary.LittleEndian.Uint16(quatData[0:4])
-	quat2 := binary.LittleEndian.Uint16(quatData[4:8])
-	quat3 := binary.LittleEndian.Uint16(quatData[8:12])
-	quat4 := binary.LittleEndian.Uint16(quatData[12:16])
+	quat1 := binary.LittleEndian.Uint32(quatData[0:4])
+	quat2 := binary.LittleEndian.Uint32(quatData[4:8])
+	quat3 := binary.LittleEndian.Uint32(quatData[8:12])
+	quat4 := binary.LittleEndian.Uint32(quatData[12:16])
 
-	floatQuat1 := math.Float32frombits(uint32(quat1))
-	floatQuat2 := math.Float32frombits(uint32(quat2))
-	floatQuat3 := math.Float32frombits(uint32(quat3))
-	floatQuat4 := math.Float32frombits(uint32(quat4))
+	floatQuat1 := math.Float32frombits(quat1)
+	floatQuat2 := math.Float32frombits(quat2)
+	floatQuat3 := math.Float32frombits(quat3)
+	floatQuat4 := math.Float32frombits(quat4)
 
 	err := model.AppendStringToFile(fmt.Sprintf("%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4), a.quatFileName)
 	if err != nil {
@@ -32,14 +32,14 @@ func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 
 func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
 	time := binary.LittleEndian.Uint32(timeData)
-	lps := binary.LittleEndian.Uint16(lpsData[0:2])
+	lps := binary.LittleEndian.Uint16(lpsData[0:3])
 
 	err := model.AppendStringToFile(fmt.Sprintf("%d,%d,\n", time, lps), a.lpsFileName)
 	if err != nil {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Lps:: %s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:2])))
+	model.HUB.SendText(fmt.Sprintf("Lps:: %s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:3])))
 	// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:3])), a.lpsFileName)
 }
 

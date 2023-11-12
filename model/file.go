@@ -98,11 +98,11 @@ func bytesToHexSpaceSeparated(data []byte) string {
 	// 16進数文字列のスライスを作成
 	hexStrings := make([]string, len(data))
 	for i, b := range data {
-		hexStrings[i] = fmt.Sprintf("%02X", b)
+		hexStrings[i] = fmt.Sprintf("%02X ", b)
 	}
 
-	// スペースで区切った文字列に変換
-	result := strings.Join(hexStrings, " ")
+	// 文字列に変換
+	result := strings.Join(hexStrings, "")
 
 	return result
 }
