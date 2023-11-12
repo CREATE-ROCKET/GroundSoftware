@@ -55,15 +55,52 @@
             <button @click="module_config($event)" class="btn">Set Module From Config File</button>
           </div>
         </form>
+        <div>
+          <p>Voltage: {{ voltage }}</p>
+        </div>
       </div>
+    </div>
+    <div class="chart-section">
+      <p>Voltage</p>
+      <Chart ref="chartRefVoltage" />
+      <p>Quat1</p>
+      <Chart ref="chartRefQuat1" />
+      <p>Quat2</p>
+      <Chart ref="chartRefQuat2" />
+    </div>
+    <div class="chart-section">
+      <p>Quat3</p>
+      <Chart ref="chartRefQuat3" />
+      <p>Quat4</p>
+      <Chart ref="chartRefQuat4" />
+      <p>LPS</p>
+      <Chart ref="chartRefLps" />
+    </div>
+    <div class="chart-section">
+      <p>OpenRate</p>
+      <Chart ref="chartRefOpenRate" />
     </div>
   </main>
   <Footer />
 </template>
 
 
+<script>
+import ChartComponent from './BarChart.vue';
+
+export default {
+  components: {
+    ChartComponent,
+  },
+  methods: {
+  },
+};
+</script>
+
+
+
 <script setup>
-import { reactive, onMounted, ref } from 'vue'
+import { reactive, onMounted, ref, getCurrentInstance } from 'vue'
 import { SerialStart } from '../../wailsjs/go/handler/App'
 import { SerialStop } from '../../wailsjs/go/handler/App'
 import { SerialTextSend } from '../../wailsjs/go/handler/App'
@@ -73,6 +110,8 @@ import { ModuleStart } from '../../wailsjs/go/handler/App'
 import { ModuleSend } from '../../wailsjs/go/handler/App'
 import { ModuleEnv } from '../../wailsjs/go/handler/App'
 import Footer from './Footer.vue';
+
+import Chart from './BarChart.vue';
 
 // reactiveなデータプロパティを追加
 const dstId = ref('');
@@ -146,6 +185,7 @@ function serial_stop(event) {
 }
 
 const logMessages = reactive([])
+const voltage = ref(0)
 let clientId = "User"
 
 function send(event) {
@@ -173,7 +213,14 @@ function clearMessage() {
   sendMessage.value = ""
 }
 
-let conn
+let conn;
+let chartComponentVoltage;
+let chartComponentQuat1;
+let chartComponentQuat2;
+let chartComponentQuat3;
+let chartComponentQuat4;
+let chartComponentLps;
+let chartComponentOpenRate;
 
 function scrollToBottom() {
   const el = document.getElementById('monitor');
@@ -185,8 +232,17 @@ function scrollToBottom() {
 }
 
 onMounted(() => {
+  // const chartComponent = this.$refs.chartRef;
   if (window.WebSocket) {
     conn = new WebSocket("ws://localhost:3007/ws")
+    chartComponentVoltage = getCurrentInstance().proxy.$refs.chartRefVoltage;
+    chartComponentQuat1 = getCurrentInstance().proxy.$refs.chartRefQuat1;
+    chartComponentQuat2 = getCurrentInstance().proxy.$refs.chartRefQuat2;
+    chartComponentQuat3 = getCurrentInstance().proxy.$refs.chartRefQuat3;
+    chartComponentQuat4 = getCurrentInstance().proxy.$refs.chartRefQuat4;
+    chartComponentLps = getCurrentInstance().proxy.$refs.chartRefLps;
+    chartComponentOpenRate = getCurrentInstance().proxy.$refs.chartRefOpenRate;
+
     conn.onclose = function (evt) {
       var time = new Date().toLocaleString()
       logMessages.push({ time, sender: "", content: "Connection closed." })
@@ -219,6 +275,26 @@ onMounted(() => {
             const content = message.substring(separatorIndex2 + 1 + 1) // メッセージ本文を抽出
             var time = new Date().toLocaleString()
             logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
+            if (sender == "Voltage") {
+              voltage.value = content
+              let valuesArray = content.split(',');
+              chartComponentVoltage.addDataPoint(valuesArray[0], valuesArray[1]);
+            }
+            if (sender == "Quat") {
+              let valuesArray = content.split(',');
+              chartComponentQuat1.addDataPoint(valuesArray[0], valuesArray[1]);
+              chartComponentQuat2.addDataPoint(valuesArray[0], valuesArray[2]);
+              chartComponentQuat3.addDataPoint(valuesArray[0], valuesArray[3]);
+              chartComponentQuat4.addDataPoint(valuesArray[0], valuesArray[4]);
+            }
+            if (sender == "Lps") {
+              let valuesArray = content.split(',');
+              chartComponentLps.addDataPoint(valuesArray[0], valuesArray[1]);
+            }
+            if (sender == "OpenRate") {
+              let valuesArray = content.split(',');
+              chartComponentOpenRate.addDataPoint(valuesArray[0], valuesArray[1]);
+            }
           } else {
             var time = new Date().toLocaleString()
             logMessages.push({ time, sender: "", content: message })

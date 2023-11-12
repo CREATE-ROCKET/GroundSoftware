@@ -9,6 +9,11 @@ import (
 	"github.com/Luftalian/Computer_software/model"
 )
 
+var quatIndex int = 0
+var lpsIndex int = 0
+var openIndex int = 0
+var voltIndex int = 0
+
 func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 	time := binary.LittleEndian.Uint32(timeData)
 	quat1 := binary.LittleEndian.Uint32(quatData[0:4])
@@ -26,8 +31,12 @@ func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Quat:: %d,%s\n", time, byteArrayToString(quatData[:16])))
-	// model.AppendStringToFile(fmt.Sprintf("%s,%s\n", byteArrayToString(timeData), byteArrayToString(quatData[:16])), a.quatFileName)
+	if quatIndex%10 == 0 {
+		model.HUB.SendText(fmt.Sprintf("Quat::%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4))
+		// model.AppendStringToFile(fmt.Sprintf("%s,%s\n", byteArrayToString(timeData), byteArrayToString(quatData[:16])), a.quatFileName)
+		quatIndex = 0
+	}
+	quatIndex++
 }
 
 func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
@@ -39,8 +48,12 @@ func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Lps:: %s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:3])))
-	// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:3])), a.lpsFileName)
+	if lpsIndex%10 == 0 {
+		model.HUB.SendText(fmt.Sprintf("Lps::%d,%d,\n", time, lps))
+		// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:3])), a.lpsFileName)
+		lpsIndex = 0
+	}
+	lpsIndex++
 }
 
 func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
@@ -60,8 +73,12 @@ func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Open:: %d,%s,\n", time, byteArrayToString(openData[:2])))
-	// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(openData[:2])), a.openFileName)
+	if openIndex%10 == 0 {
+		model.HUB.SendText(fmt.Sprintf("OpenRate::%d,%d,\n", time, open))
+		// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(openData[:2])), a.openFileName)
+		openIndex = 0
+	}
+	openIndex++
 }
 
 func (a *App) VoltageToFile(voltageData []byte) {
@@ -74,5 +91,9 @@ func (a *App) VoltageToFile(voltageData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	model.HUB.SendText(fmt.Sprintf("Voltage:: %d,%d,%d,\n", voltage1, voltage2, voltage3))
+	if voltIndex%10 == 0 {
+		model.HUB.SendText(fmt.Sprintf("Voltage::%d,%d,%d,\n", voltage1, voltage2, voltage3))
+		voltIndex = 0
+	}
+	voltIndex++
 }
