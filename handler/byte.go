@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"log"
 	"strconv"
-
-	"github.com/Luftalian/Computer_software/model"
 )
 
 func byteArrayToString(bytes []byte) string {
@@ -133,13 +131,13 @@ func (a *App) ParseData(data []byte) {
 		if header == 0x50 && data[0] == 0x17 {
 			// 電圧用のコード
 			offset := 11 + 1
-			model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+2]))
-			a.VoltageToFile(data[offset : offset+2])
+			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9]))
+			a.VoltageToFile(data[offset : offset+9])
 			return
 		} else if header == 0x51 && data[0] == 0x17 {
 			offset := 11 + 1
-			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+2]))
-			a.VoltageToFile(data[offset : offset+2])
+			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9]))
+			a.VoltageToFile(data[offset : offset+9])
 			return
 		}
 		return

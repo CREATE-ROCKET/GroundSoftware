@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
@@ -29,30 +30,30 @@ func (a *App) Startup(ctx context.Context) {
 		return
 	}
 
-	a.rawFileName = "data/" + timestamp + "/raw_" + timestamp + ".txt"
+	a.rawFileName = filepath.Join("data", timestamp, "raw_"+timestamp+".txt")
 	err := makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/raw_"+timestamp+".txt")
 	if err != nil {
 		log.Println(err)
 	}
 
-	a.quatFileName = "data/" + timestamp + "/quat_" + timestamp + ".txt"
+	a.quatFileName = filepath.Join("data", timestamp, "quat_"+timestamp+".txt")
 	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/quat_"+timestamp+".txt")
 	if err != nil {
 		log.Println(err)
 	}
 
-	a.lpsFileName = "data/" + timestamp + "/lps_" + timestamp + ".txt"
+	a.lpsFileName = filepath.Join("data", timestamp, "lps_"+timestamp+".txt")
 	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/lps_"+timestamp+".txt")
 	if err != nil {
 		log.Println(err)
 	}
 
-	a.openFileName = "data/" + timestamp + "/open_" + timestamp + ".txt"
+	a.openFileName = filepath.Join("data", timestamp, "open_"+timestamp+".txt")
 	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/open_"+timestamp+".txt")
 	if err != nil {
 		log.Println(err)
 	}
-	a.voltFileName = "data/" + timestamp + "/volt_" + timestamp + ".txt"
+	a.voltFileName = filepath.Join("data", timestamp, "volt_"+timestamp+".txt")
 	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/volt_"+timestamp+".txt")
 	if err != nil {
 		log.Println(err)
