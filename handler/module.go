@@ -61,15 +61,15 @@ func (a *App) ModuleSend(text string) {
 	// }
 
 	// a.SerialTextSend(sendData)
-	log.Println(sendData)
+	/// log.Println(sendData)
 	s, err := hexStringToBytes(sendData)
-	s = append(s, byteDate...)
-	log.Println(s)
+	/// log.Println(s)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
 		return
 	}
+	s = append(s, byteDate...)
 	a.SerialByteSend(s)
 	model.HUB.SendText("Module: " + sendData)
 	// return sendData

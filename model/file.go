@@ -3,6 +3,7 @@ package model
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -10,25 +11,24 @@ import (
 var filename = ""
 
 func CreateFileWithTimestamp() error {
-	currentTime := time.Now()
-	timestamp := currentTime.Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
-	filename = "log/file_" + timestamp + ".txt"
-
-	dirPath := "log"
+	timestamp := time.Now().Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
+	filename = filepath.Join("log", "file_"+timestamp+".txt")
 
 	// ディレクトリの存在を確認
-	if _, err := os.Stat(dirPath); err == nil {
+	if _, err := os.Stat("log"); err == nil {
 	} else if os.IsNotExist(err) {
-		err = os.Mkdir(dirPath, 0755)
+		err = os.Mkdir("log", 0755)
 		if err != nil {
 			return err
 		}
 	} else {
+		HUB.SendError(err.Error())
 		return err
 	}
 
 	file, err := os.Create(filename)
 	if err != nil {
+		HUB.SendError(err.Error())
 		return err
 	}
 	defer file.Close()
@@ -40,17 +40,18 @@ func AppendDataWithTimeToFile(data string) error {
 	if filename == "" {
 		err := CreateFileWithTimestamp()
 		if err != nil {
+			HUB.SendError(err.Error())
 			return err
 		}
 	}
 	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
+		HUB.SendError(err.Error())
 		return err
 	}
 	defer file.Close()
 
-	currentTime := time.Now()
-	timeStamp := currentTime.Format("2006-01-02 15:04:05")
+	timeStamp := time.Now().Format("2006-01-02 15:04:05")
 	if _, err := file.WriteString(timeStamp + " - " + data + "\n"); err != nil {
 		return err
 	}
