@@ -126,12 +126,16 @@ func (a *App) ParseData(data []byte) {
 	/// log.Printf("Header: 0x%02x\n", header)
 	if header != 0x40 || data[0] != 0xb7 {
 		if header == 0x50 && data[0] == 0x17 {
+			// 電圧データなし
 			// 電圧用のコード
 			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9])) // offset=12
-			a.VoltageToFile(data[12:21])
+			// log.Println(data[12:21])
+			// a.VoltageToFile(data[12:21])
 			return
 		} else if header == 0x51 && data[0] == 0x17 {
+			// 電圧データあり
 			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9])) // offset=12
+			// log.Println(data[12:21])
 			a.VoltageToFile(data[12:21])
 			return
 		}
