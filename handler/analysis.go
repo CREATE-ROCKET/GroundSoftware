@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"log"
 	"math"
 
 	"github.com/Luftalian/Computer_software/model"
@@ -16,22 +17,18 @@ var voltIndex int = 0
 
 func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 	time := binary.LittleEndian.Uint32(timeData)
-	quat1 := binary.LittleEndian.Uint32(quatData[0:4])
-	quat2 := binary.LittleEndian.Uint32(quatData[4:8])
-	quat3 := binary.LittleEndian.Uint32(quatData[8:12])
-	quat4 := binary.LittleEndian.Uint32(quatData[12:16])
 
-	floatQuat1 := math.Float32frombits(quat1)
-	floatQuat2 := math.Float32frombits(quat2)
-	floatQuat3 := math.Float32frombits(quat3)
-	floatQuat4 := math.Float32frombits(quat4)
+	floatQuat1 := math.Float32frombits(binary.LittleEndian.Uint32(quatData[0:4]))
+	floatQuat2 := math.Float32frombits(binary.LittleEndian.Uint32(quatData[4:8]))
+	floatQuat3 := math.Float32frombits(binary.LittleEndian.Uint32(quatData[8:12]))
+	floatQuat4 := math.Float32frombits(binary.LittleEndian.Uint32(quatData[12:16]))
 
 	err := model.AppendStringToFile(fmt.Sprintf("%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4), a.quatFileName)
 	if err != nil {
 		model.HUB.SendError(err.Error())
 	}
 
-	if quatIndex%10 == 0 {
+	if quatIndex%100 == 0 {
 		model.HUB.SendText(fmt.Sprintf("Quat::%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4))
 		// model.AppendStringToFile(fmt.Sprintf("%s,%s\n", byteArrayToString(timeData), byteArrayToString(quatData[:16])), a.quatFileName)
 		quatIndex = 0
@@ -48,7 +45,7 @@ func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	if lpsIndex%10 == 0 {
+	if lpsIndex%100 == 0 {
 		model.HUB.SendText(fmt.Sprintf("Lps::%d,%d,\n", time, lps))
 		// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(lpsData[:3])), a.lpsFileName)
 		lpsIndex = 0
@@ -64,7 +61,7 @@ func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
 	// バイト列から signed int に変換
 	err := binary.Read(bytes.NewReader(openData[:2]), binary.LittleEndian, &open)
 	if err != nil {
-		fmt.Println("Error converting quat1:", err)
+		log.Println("Error converting quat1:", err)
 		return
 	}
 
@@ -73,7 +70,7 @@ func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	if openIndex%10 == 0 {
+	if openIndex%100 == 0 {
 		model.HUB.SendText(fmt.Sprintf("OpenRate::%d,%d,\n", time, open))
 		// model.AppendStringToFile(fmt.Sprintf("%s,%s,\n", byteArrayToString(timeData), byteArrayToString(openData[:2])), a.openFileName)
 		openIndex = 0
@@ -91,7 +88,7 @@ func (a *App) VoltageToFile(voltageData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	if voltIndex%10 == 0 {
+	if voltIndex%100 == 0 {
 		model.HUB.SendText(fmt.Sprintf("Voltage::%d,%d,%d,\n", voltage1, voltage2, voltage3))
 		voltIndex = 0
 	}

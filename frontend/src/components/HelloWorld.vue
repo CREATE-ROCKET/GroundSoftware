@@ -310,5 +310,4 @@ onMounted(() => {
 })
 </script>
 
-
 <style src="../style.css"></style>

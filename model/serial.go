@@ -22,11 +22,11 @@ func SerialInit(selectedPort string) (string, error) {
 		return "", err
 	}
 	if len(ports) == 0 {
-		HUB.SendText("Serial:" + "No serial ports found!")
-		return "", fmt.Errorf("No serial ports found!")
+		HUB.SendText("Serial:No serial ports found!")
+		return "", fmt.Errorf("no serial ports found")
 	}
 	log.Println("Found ports:", len(ports))
-	HUB.SendText("Serial:" + "Found ports:" + string(len(ports)))
+	HUB.SendText(fmt.Sprintf("Serial:Found ports:%d", len(ports)))
 	// Open the first serial port detected at 115200bps N81
 	mode := &serial.Mode{
 		BaudRate: 115200,
@@ -75,9 +75,9 @@ func SerialInit(selectedPort string) (string, error) {
 			// }
 		} else {
 			log.Printf("Opened port %s\n", selectedPort)
-			HUB.SendText("Serial:" + "Opened port " + selectedPort)
+			HUB.SendText("Serial:Opened port " + selectedPort)
 			return selectedPort, nil
 		}
 	}
-	return "", fmt.Errorf("No serial ports found!")
+	return "", fmt.Errorf("no serial ports found")
 }

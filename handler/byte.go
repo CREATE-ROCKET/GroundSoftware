@@ -2,22 +2,19 @@ package handler
 
 import (
 	"errors"
-	"fmt"
-	"log"
-	"strconv"
 )
 
-func byteArrayToString(bytes []byte) string {
-	result := "["
-	for i, b := range bytes {
-		result += strconv.Itoa(int(b))
-		if i < len(bytes)-1 {
-			result += " "
-		}
-	}
-	result += "]"
-	return result
-}
+// func byteArrayToString(bytes []byte) string {
+// 	result := "["
+// 	for i, b := range bytes {
+// 		result += strconv.Itoa(int(b))
+// 		if i < len(bytes)-1 {
+// 			result += " "
+// 		}
+// 	}
+// 	result += "]"
+// 	return result
+// }
 
 // var dataLength int
 
@@ -83,8 +80,8 @@ func (a *App) ReceiveData(receivedData chan []byte) {
 			} else if err == nil {
 				// データを取り出して解析
 				parsedData := buffer[start:end]
-				fmt.Println(parsedData)
-				a.ParseData(parsedData)
+				/// log.Println(parsedData)
+				go a.ParseData(parsedData) // go文に
 
 				// 解析が終わったデータをバッファから削除
 				buffer = buffer[end:]
@@ -103,7 +100,7 @@ func StartCommand(data []byte) (int, int, error) {
 				if i+2+length < len(data) {
 					return i + 2, i + 2 + length, nil
 				} else {
-					log.Println("aaaaaaaaaasfffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", i+2+length, len(data))
+					/// log.Println("aaaaaaaaaasfffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", i+2+length, len(data))
 					// データの長さが足りない
 					// 最初のコマンドと長さコマンド含むけど、データが途中までしかないとき
 					return i + 2, i + 2 + length, ErrInsufficientDataLength
@@ -126,24 +123,26 @@ func StartCommand(data []byte) (int, int, error) {
 // 来るデータは長さコマンドから始まる
 func (a *App) ParseData(data []byte) {
 	header := data[11]
-	fmt.Printf("Header: 0x%02x\n", header)
+	/// log.Printf("Header: 0x%02x\n", header)
 	if header != 0x40 || data[0] != 0xb7 {
 		if header == 0x50 && data[0] == 0x17 {
+			// 電圧データなし
 			// 電圧用のコード
-			offset := 11 + 1
-			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9]))
-			a.VoltageToFile(data[offset : offset+9])
+			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9])) // offset=12
+			// log.Println(data[12:21])
+			// a.VoltageToFile(data[12:21])
 			return
 		} else if header == 0x51 && data[0] == 0x17 {
-			offset := 11 + 1
-			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9]))
-			a.VoltageToFile(data[offset : offset+9])
+			// 電圧データあり
+			// model.HUB.SendText("Voltage: " + byteArrayToString(data[offset:offset+9])) // offset=12
+			// log.Println(data[12:21])
+			a.VoltageToFile(data[12:21])
 			return
 		}
 		return
 	}
 
-	offset := 11 + 1
+	offset := 12
 	for i := 0; i < 8; i++ {
 		time := data[offset : offset+4]
 		offset += 4
@@ -151,21 +150,21 @@ func (a *App) ParseData(data []byte) {
 		quat := data[offset : offset+4*4]
 		offset += 4 * 4
 
-		// fmt.Printf("Data %d: %d, %d\n", i+1, time, quat)
+		// log.Printf("Data %d: %d, %d\n", i+1, time, quat)
 		a.QuatAndTimeToFile(time, quat)
 	}
 
 	lpsTime := data[offset : offset+4]
 	offset += 4
-	// fmt.Printf("lpsTime: %d\n", lpsTime)
+	// log.Printf("lpsTime: %d\n", lpsTime)
 
 	pressure := data[offset : offset+3]
 	offset += 3
-	// fmt.Printf("pressure: %d\n", pressure)
+	// log.Printf("pressure: %d\n", pressure)
 	a.LpsAndTimeToFile(lpsTime, pressure)
 
 	openRate := data[offset : offset+2]
-	offset += 2
-	// fmt.Printf("openRate: %d\n", openRate)
+	// offset += 2
+	// log.Printf("openRate: %d\n", openRate)
 	a.OpenAndTimeToFile(lpsTime, openRate)
 }

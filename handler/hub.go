@@ -5,8 +5,6 @@
 package handler
 
 import (
-	"log"
-
 	"github.com/Luftalian/Computer_software/model"
 )
 
@@ -21,7 +19,7 @@ func Run(h *model.Hub) {
 				close(client.Send)
 			}
 		case message := <-h.Broadcast:
-			log.Printf("broadcast: %v", string(message))
+			/// log.Printf("broadcast: %v", string(message))
 			for client := range h.Clients {
 				select {
 				case client.Send <- message:

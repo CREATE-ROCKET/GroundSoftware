@@ -17,8 +17,7 @@ func (a *App) Startup(ctx context.Context) {
 	log.Print("-------------------------------------------sssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
 	a.ModuleEnv()
 
-	currentTime := time.Now()
-	timestamp := currentTime.Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
+	timestamp := time.Now().Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
 
 	if _, err := os.Stat("data"); err == nil {
 	} else if os.IsNotExist(err) {
@@ -31,30 +30,30 @@ func (a *App) Startup(ctx context.Context) {
 	}
 
 	a.rawFileName = filepath.Join("data", timestamp, "raw_"+timestamp+".txt")
-	err := makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/raw_"+timestamp+".txt")
+	err := makeDirAndFile(filepath.Join("data", timestamp), a.rawFileName)
 	if err != nil {
 		log.Println(err)
 	}
 
 	a.quatFileName = filepath.Join("data", timestamp, "quat_"+timestamp+".txt")
-	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/quat_"+timestamp+".txt")
+	err = makeDirAndFile(filepath.Join("data", timestamp), a.quatFileName)
 	if err != nil {
 		log.Println(err)
 	}
 
 	a.lpsFileName = filepath.Join("data", timestamp, "lps_"+timestamp+".txt")
-	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/lps_"+timestamp+".txt")
+	err = makeDirAndFile(filepath.Join("data", timestamp), a.lpsFileName)
 	if err != nil {
 		log.Println(err)
 	}
 
 	a.openFileName = filepath.Join("data", timestamp, "open_"+timestamp+".txt")
-	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/open_"+timestamp+".txt")
+	err = makeDirAndFile(filepath.Join("data", timestamp), a.openFileName)
 	if err != nil {
 		log.Println(err)
 	}
 	a.voltFileName = filepath.Join("data", timestamp, "volt_"+timestamp+".txt")
-	err = makeDirAndFile("data/"+timestamp, "data/"+timestamp+"/volt_"+timestamp+".txt")
+	err = makeDirAndFile(filepath.Join("data", timestamp), a.voltFileName)
 	if err != nil {
 		log.Println(err)
 	}

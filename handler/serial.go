@@ -79,7 +79,7 @@ func (a *App) SerialTextSend(text string) {
 		_, err := model.SerialInit("")
 		if err != nil {
 			log.Println(err)
-			// model.HUB.SendError(err.Error())
+			model.HUB.SendError(err.Error())
 			return
 		}
 	}
@@ -100,12 +100,12 @@ func (a *App) SerialByteSend(byteDate []byte) {
 		_, err := model.SerialInit("")
 		if err != nil {
 			log.Println(err)
-			// model.HUB.SendError(err.Error())
+			model.HUB.SendError(err.Error())
 			return
 		}
 	}
 	// Send string to the serial port
-	n, err := model.Port.Write(byteDate)
+	_, err := model.Port.Write(byteDate)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
@@ -113,7 +113,7 @@ func (a *App) SerialByteSend(byteDate []byte) {
 
 		// }
 	}
-	log.Printf("Sent %v bytes\n", n)
+	/// log.Printf("Sent %v bytes\n", n)
 }
 
 func (a *App) PortList() []string {

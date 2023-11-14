@@ -4,8 +4,6 @@
 
 package model
 
-import "log"
-
 // Hub maintains the set of active clients and broadcasts messages to the
 // clients.
 type Hub struct {
@@ -34,13 +32,13 @@ func NewHub() *Hub {
 }
 
 func (h *Hub) SendText(text string) {
-	err := AppendDataWithTimeToFile(text)
-	if err != nil {
-		h.Broadcast <- []byte(err.Error())
-		log.Println(err)
-	}
+	/// err := AppendDataWithTimeToFile(text)
+	// if err != nil {
+	// 	h.Broadcast <- []byte(err.Error())
+	// 	log.Println(err)
+	// }
 	h.Broadcast <- []byte(text)
-	log.Print(text)
+	/// log.Print(text)
 }
 
 func (h *Hub) SendError(text string) {

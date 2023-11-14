@@ -6,7 +6,6 @@ package model
 
 import (
 	"bytes"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -76,7 +75,7 @@ func (c *Client) ReadPump() {
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 
-		AppendDataWithTimeToFile(fmt.Sprintf("broadcast: %v", string(message)))
+		/// AppendDataWithTimeToFile(fmt.Sprintf("broadcast: %v", string(message)))
 		c.Hub.Broadcast <- message
 	}
 }

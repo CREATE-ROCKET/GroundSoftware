@@ -61,15 +61,15 @@ func (a *App) ModuleSend(text string) {
 	// }
 
 	// a.SerialTextSend(sendData)
-	log.Println(sendData)
+	/// log.Println(sendData)
 	s, err := hexStringToBytes(sendData)
-	s = append(s, byteDate...)
-	log.Println(s)
+	/// log.Println(s)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
 		return
 	}
+	s = append(s, byteDate...)
 	a.SerialByteSend(s)
 	model.HUB.SendText("Module: " + sendData)
 	// return sendData
@@ -107,6 +107,7 @@ func (a *App) ModuleEnv() {
 	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Printf("ファイルの読み込みエラー: %v", err)
+		model.HUB.SendError(err.Error())
 	}
 
 	// JSONデコード
@@ -114,6 +115,7 @@ func (a *App) ModuleEnv() {
 	err = json.Unmarshal(fileContent, &config)
 	if err != nil {
 		log.Printf("JSONデコードエラー: %v", err)
+		model.HUB.SendError(err.Error())
 	}
 
 	// 読み込んだデータの表示
