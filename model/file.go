@@ -76,7 +76,8 @@ func AppendToFile(data []byte, fileLabel string) error {
 	}
 	defer file.Close()
 
-	if _, err := file.WriteString(bytesToHexSpaceSeparated(data)); err != nil {
+	// if _, err := file.WriteString(bytesToHexSpaceSeparated(data)); err != nil {
+	if _, err := file.Write(data); err != nil {
 		return err
 	}
 	return nil

@@ -107,6 +107,7 @@ func (a *App) ModuleEnv() {
 	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Printf("ファイルの読み込みエラー: %v", err)
+		model.HUB.SendError(err.Error())
 	}
 
 	// JSONデコード
@@ -114,6 +115,7 @@ func (a *App) ModuleEnv() {
 	err = json.Unmarshal(fileContent, &config)
 	if err != nil {
 		log.Printf("JSONデコードエラー: %v", err)
+		model.HUB.SendError(err.Error())
 	}
 
 	// 読み込んだデータの表示
