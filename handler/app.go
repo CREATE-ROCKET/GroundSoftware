@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"os"
 )
 
 // App struct
@@ -12,6 +13,11 @@ type App struct {
 	lpsFileName  string
 	openFileName string
 	voltFileName string
+	rawFile      *os.File
+	quatFile     *os.File
+	lpsFile      *os.File
+	openFile     *os.File
+	voltFile     *os.File
 }
 
 // NewApp creates a new App application struct

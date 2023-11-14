@@ -19,7 +19,8 @@ func (a *App) Startup(ctx context.Context) {
 
 	timestamp := time.Now().Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
 
-	if _, err := os.Stat("data"); err == nil {
+	_, err := os.Stat("data")
+	if err == nil {
 	} else if os.IsNotExist(err) {
 		err = os.Mkdir("data", 0755)
 		if err != nil {
@@ -30,30 +31,30 @@ func (a *App) Startup(ctx context.Context) {
 	}
 
 	a.rawFileName = filepath.Join("data", timestamp, "raw_"+timestamp+".txt")
-	err := makeDirAndFile(filepath.Join("data", timestamp), a.rawFileName)
+	a.rawFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.rawFileName)
 	if err != nil {
 		log.Println(err)
 	}
 
 	a.quatFileName = filepath.Join("data", timestamp, "quat_"+timestamp+".txt")
-	err = makeDirAndFile(filepath.Join("data", timestamp), a.quatFileName)
+	a.quatFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.quatFileName)
 	if err != nil {
 		log.Println(err)
 	}
 
 	a.lpsFileName = filepath.Join("data", timestamp, "lps_"+timestamp+".txt")
-	err = makeDirAndFile(filepath.Join("data", timestamp), a.lpsFileName)
+	a.lpsFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.lpsFileName)
 	if err != nil {
 		log.Println(err)
 	}
 
 	a.openFileName = filepath.Join("data", timestamp, "open_"+timestamp+".txt")
-	err = makeDirAndFile(filepath.Join("data", timestamp), a.openFileName)
+	a.openFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.openFileName)
 	if err != nil {
 		log.Println(err)
 	}
 	a.voltFileName = filepath.Join("data", timestamp, "volt_"+timestamp+".txt")
-	err = makeDirAndFile(filepath.Join("data", timestamp), a.voltFileName)
+	a.voltFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.voltFileName)
 	if err != nil {
 		log.Println(err)
 	}
@@ -78,20 +79,20 @@ func (a *App) BeforeClose(ctx context.Context) bool {
 	return dialog != "Yes"
 }
 
-func makeDirAndFile(dir string, file string) error {
+func makeDirAndFile(dir string, file string) (*os.File, error) {
 	if _, err := os.Stat(dir); err == nil {
 	} else if os.IsNotExist(err) {
 		err = os.Mkdir(dir, 0755)
 		if err != nil {
-			return err
+			return nil, err
 		}
 	} else {
-		return err
+		return nil, err
 	}
 	rawFile, err := os.Create(file)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer rawFile.Close()
-	return nil
+	return rawFile, nil
 }

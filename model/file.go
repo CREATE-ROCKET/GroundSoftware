@@ -96,6 +96,16 @@ func AppendStringToFile(data string, fileLabel string) error {
 	return nil
 }
 
+func AppendStringToFileDirect(data string, file *os.File) error {
+	// if file == nil {
+	// 	os.Open(filename)
+	// }
+	if _, err := file.WriteString(data); err != nil {
+		return err
+	}
+	return nil
+}
+
 func bytesToHexSpaceSeparated(data []byte) string {
 	// 16進数文字列のスライスを作成
 	hexStrings := make([]string, len(data))
