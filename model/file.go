@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -83,6 +84,13 @@ func AppendToFile(data []byte, fileLabel string) error {
 	return nil
 }
 
+func AppendToFileDirect(data []byte, file *os.File) error {
+	if _, err := file.Write(data); err != nil {
+		return err
+	}
+	return nil
+}
+
 func AppendStringToFile(data string, fileLabel string) error {
 	file, err := os.OpenFile(fileLabel, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
@@ -91,6 +99,14 @@ func AppendStringToFile(data string, fileLabel string) error {
 	defer file.Close()
 
 	if _, err := file.WriteString(data); err != nil {
+		return err
+	}
+	return nil
+}
+
+func AppendStringToFileDirect(data string, file *os.File) error {
+	if _, err := file.WriteString(data); err != nil {
+		log.Println(err)
 		return err
 	}
 	return nil

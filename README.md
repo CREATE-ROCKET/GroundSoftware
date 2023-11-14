@@ -56,7 +56,8 @@ If you tag your commits with versions such as `v1.0.0`, a new release will be cr
 ## Command
 ```bash
 xxd -p -c 1 2023-11-12-17-59-29/raw_2023-11-12-17-59-29.txt | tr -d '\n' | sed 's/\(..\)/\1 /g' | tr -s ' '
-xxd -p -c 1 2023-11-12-17-59-29/raw_2023-11-12-17-59-29.txt.txt | tr -d '\n' | sed 's/\(..\)/\1 /g' | tr -s ' ' > output.txt
+xxd -p -c 1 2023-11-12-17-59-29/raw_2023-11-12-17-59-29.txt | tr -d '\n' | sed 's/\(..\)/\1 /g' | tr -s ' ' > output.txt
+xxd -p -c 1 raw_*.txt | tr -d '\n' | sed 's/\(..\)/\1 /g' | tr -s ' ' > output.txt
 ```
 
 ## License

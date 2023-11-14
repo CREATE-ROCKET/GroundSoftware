@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"log"
+	"os"
 
 	"github.com/Luftalian/Computer_software/model"
 	"go.bug.st/serial"
@@ -23,12 +24,53 @@ func (a *App) SerialStart() {
 		}
 	}
 
+	var err error
+	a.rawFile, err = os.OpenFile(a.rawFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		return
+	}
+	defer a.rawFile.Close()
+
+	a.quatFile, err = os.OpenFile(a.quatFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		return
+	}
+	defer a.quatFile.Close()
+
+	a.lpsFile, err = os.OpenFile(a.lpsFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		return
+	}
+	defer a.lpsFile.Close()
+
+	a.openFile, err = os.OpenFile(a.openFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		return
+	}
+	defer a.openFile.Close()
+
+	a.voltFile, err = os.OpenFile(a.voltFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+		model.HUB.SendError(err.Error())
+		return
+	}
+	defer a.voltFile.Close()
+
 	receivedData := make(chan []byte)
 	// バックグラウンドでデータを受信し解析するゴルーチン
 	go a.ReceiveData(receivedData)
 
 	// Read and print the response
-	buff := make([]byte, 100)
+	buff := make([]byte, 1024)
 	for {
 		n, err := model.Port.Read(buff)
 		if err != nil {
@@ -36,6 +78,7 @@ func (a *App) SerialStart() {
 			model.HUB.SendError(err.Error())
 			// return
 		}
+		log.Printf("buffer length: %d\n", n)
 		// model.HUB.SendText("Serial::" + byteArrayToString(buff[:n]))
 
 		// if n == 0 {
@@ -57,7 +100,8 @@ func (a *App) SerialStart() {
 
 		receivedData <- buff[:n]
 		// 生データの保存
-		err = model.AppendToFile(buff[:n], a.rawFileName)
+		// err = model.AppendToFile(buff[:n], a.rawFileName)
+		err = model.AppendToFileDirect(buff[:n], a.rawFile)
 		if err != nil {
 			log.Println(err)
 			model.HUB.SendError(err.Error())

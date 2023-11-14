@@ -23,7 +23,8 @@ func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 	floatQuat3 := math.Float32frombits(binary.LittleEndian.Uint32(quatData[8:12]))
 	floatQuat4 := math.Float32frombits(binary.LittleEndian.Uint32(quatData[12:16]))
 
-	err := model.AppendStringToFile(fmt.Sprintf("%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4), a.quatFileName)
+	// err := model.AppendStringToFile(fmt.Sprintf("%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4), a.quatFileName)
+	err := model.AppendStringToFileDirect(fmt.Sprintf("%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4), a.quatFile)
 	if err != nil {
 		model.HUB.SendError(err.Error())
 	}
@@ -40,7 +41,8 @@ func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
 	time := binary.LittleEndian.Uint32(timeData)
 	lps := binary.LittleEndian.Uint16(lpsData[0:3])
 
-	err := model.AppendStringToFile(fmt.Sprintf("%d,%d,\n", time, lps), a.lpsFileName)
+	// err := model.AppendStringToFile(fmt.Sprintf("%d,%d,\n", time, lps), a.lpsFileName)
+	err := model.AppendStringToFileDirect(fmt.Sprintf("%d,%d,\n", time, lps), a.lpsFile)
 	if err != nil {
 		model.HUB.SendError(err.Error())
 	}
@@ -65,7 +67,8 @@ func (a *App) OpenAndTimeToFile(timeData []byte, openData []byte) {
 		return
 	}
 
-	err = model.AppendStringToFile(fmt.Sprintf("%d,%d,\n", time, open), a.openFileName)
+	// err = model.AppendStringToFile(fmt.Sprintf("%d,%d,\n", time, open), a.openFileName)
+	err = model.AppendStringToFileDirect(fmt.Sprintf("%d,%d,\n", time, open), a.openFile)
 	if err != nil {
 		model.HUB.SendError(err.Error())
 	}
@@ -83,7 +86,8 @@ func (a *App) VoltageToFile(voltageData []byte) {
 	voltage2 := binary.LittleEndian.Uint16(voltageData[3:6])
 	voltage3 := binary.LittleEndian.Uint16(voltageData[6:9])
 
-	err := model.AppendStringToFile(fmt.Sprintf("%d,%d,%d,\n", voltage1, voltage2, voltage3), a.voltFileName)
+	// err := model.AppendStringToFile(fmt.Sprintf("%d,%d,%d,\n", voltage1, voltage2, voltage3), a.voltFileName)
+	err := model.AppendStringToFileDirect(fmt.Sprintf("%d,%d,%d,\n", voltage1, voltage2, voltage3), a.voltFile)
 	if err != nil {
 		model.HUB.SendError(err.Error())
 	}
