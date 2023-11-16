@@ -58,6 +58,8 @@
         <div>
           <p>Voltage: {{ voltage }}</p>
         </div>
+        <p>Chart & 3D model status: {{ load }}</p>
+        <button @click="load_change($event)" class="btn">Chart & 3D model Change to {{ !load }}</button>
       </div>
     </div>
     <div class="chart-section">
@@ -80,19 +82,35 @@
       <p>OpenRate</p>
       <Chart ref="chartRefOpenRate" />
     </div>
+    <Cube :qua="quaternionArray" ref="cubeRef" />
   </main>
   <Footer />
 </template>
 
 
 <script>
+import Cube from './Quaternion.vue';
 import ChartComponent from './BarChart.vue';
+
 
 export default {
   components: {
+    Cube,
     ChartComponent,
   },
+  data() {
+    return {
+      quaternionArray: [1, 0.5, 0, 0.5], // Example: Rotate by 90 degrees around the y-axis
+    };
+  },
   methods: {
+    rotateCube() {
+      // Modify quaternionArray or call any other method in the Cube component
+      // Example: rotate the cube by changing the quaternion values
+      this.quaternionArray = [0, 0, 0.7071, 0.7071]; // Example: Rotate by 180 degrees around the z-axis
+      // Access the Cube component using refs
+      this.$refs.cubeRef.quaternion(); // Call the quaternion method in Cube
+    },
   },
 };
 </script>
@@ -113,11 +131,22 @@ import Footer from './Footer.vue';
 
 import Chart from './BarChart.vue';
 
+// import Quaternion from './Quaternion.vue'
+
 // reactiveなデータプロパティを追加
 const dstId = ref('');
 const srcId = ref('');
 const sendMessage = ref('');
 const isChecked = ref(false);
+
+function load_change(event) {
+  event.preventDefault()
+  if (load.value == true) {
+    load.value = false
+  } else {
+    load.value = true
+  }
+}
 
 // module_start関数を更新し、データプロパティから引数を使用する
 function module_id(event) {
@@ -188,6 +217,8 @@ const logMessages = reactive([])
 const voltage = ref(0)
 let clientId = "User"
 
+const load = ref(false)
+
 function send(event) {
   event.preventDefault()
   if (sendMessage.value == '') {
@@ -221,6 +252,7 @@ let chartComponentQuat3;
 let chartComponentQuat4;
 let chartComponentLps;
 let chartComponentOpenRate;
+let cubeRefComponent;
 
 function scrollToBottom() {
   const el = document.getElementById('monitor');
@@ -242,6 +274,7 @@ onMounted(() => {
     chartComponentQuat4 = getCurrentInstance().proxy.$refs.chartRefQuat4;
     chartComponentLps = getCurrentInstance().proxy.$refs.chartRefLps;
     chartComponentOpenRate = getCurrentInstance().proxy.$refs.chartRefOpenRate;
+    cubeRefComponent = getCurrentInstance().proxy;
 
     conn.onclose = function (evt) {
       var time = new Date().toLocaleString()
@@ -275,25 +308,30 @@ onMounted(() => {
             const content = message.substring(separatorIndex2 + 1 + 1) // メッセージ本文を抽出
             var time = new Date().toLocaleString()
             logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
-            if (sender == "Voltage") {
-              voltage.value = content
-              let valuesArray = content.split(',');
-              chartComponentVoltage.addDataPoint(valuesArray[0], valuesArray[1]);
-            }
-            if (sender == "Quat") {
-              let valuesArray = content.split(',');
-              chartComponentQuat1.addDataPoint(valuesArray[0], valuesArray[1]);
-              chartComponentQuat2.addDataPoint(valuesArray[0], valuesArray[2]);
-              chartComponentQuat3.addDataPoint(valuesArray[0], valuesArray[3]);
-              chartComponentQuat4.addDataPoint(valuesArray[0], valuesArray[4]);
-            }
-            if (sender == "Lps") {
-              let valuesArray = content.split(',');
-              chartComponentLps.addDataPoint(valuesArray[0], valuesArray[1]);
-            }
-            if (sender == "OpenRate") {
-              let valuesArray = content.split(',');
-              chartComponentOpenRate.addDataPoint(valuesArray[0], valuesArray[1]);
+            if (load.value == true) {
+              if (sender == "Voltage") {
+                voltage.value = content
+                let valuesArray = content.split(',');
+                chartComponentVoltage.addDataPoint(valuesArray[0], valuesArray[1]);
+              }
+              if (sender == "Quat") {
+                let valuesArray = content.split(',');
+                chartComponentQuat1.addDataPoint(valuesArray[0], valuesArray[1]);
+                chartComponentQuat2.addDataPoint(valuesArray[0], valuesArray[2]);
+                chartComponentQuat3.addDataPoint(valuesArray[0], valuesArray[3]);
+                chartComponentQuat4.addDataPoint(valuesArray[0], valuesArray[4]);
+
+                cubeRefComponent.quaternionArray = [parseFloat(valuesArray[1]), parseFloat(valuesArray[2]), parseFloat(valuesArray[3]), parseFloat(valuesArray[4])];
+                cubeRefComponent.$refs.cubeRef.quaternion(); // Call the quaternion method in Cube
+              }
+              if (sender == "Lps") {
+                let valuesArray = content.split(',');
+                chartComponentLps.addDataPoint(valuesArray[0], valuesArray[1]);
+              }
+              if (sender == "OpenRate") {
+                let valuesArray = content.split(',');
+                chartComponentOpenRate.addDataPoint(valuesArray[0], valuesArray[1]);
+              }
             }
           } else {
             var time = new Date().toLocaleString()
