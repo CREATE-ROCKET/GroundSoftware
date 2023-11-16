@@ -7,6 +7,8 @@ export default defineConfig({
     include: ['three', 'chart.js/auto'],
   },
   build: {
-    
+    rollupOptions: {
+      external: ['chart.js/auto'],
+    },
   },
 });
