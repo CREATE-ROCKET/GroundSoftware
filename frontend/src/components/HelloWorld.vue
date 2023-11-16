@@ -58,8 +58,10 @@
         <div>
           <p>Voltage: {{ voltage }}</p>
         </div>
-        <p>Chart & 3D model status: {{ load }}</p>
-        <button @click="load_change($event)" class="btn">Chart & 3D model Change to {{ !load }}</button>
+        <p>Chart status: {{ load }}</p>
+        <button @click="load_change($event)" class="btn">Chart Change to {{ !load }}</button>
+        <p>Model status: {{ loadModel }}</p>
+        <button @click="loadModel_change($event)" class="btn">Model Change to {{ !loadModel }}</button>
       </div>
     </div>
     <div class="chart-section">
@@ -148,6 +150,15 @@ function load_change(event) {
   }
 }
 
+function loadModel_change(event) {
+  event.preventDefault()
+  if (loadModel.value == true) {
+    loadModel.value = false
+  } else {
+    loadModel.value = true
+  }
+}
+
 // module_start関数を更新し、データプロパティから引数を使用する
 function module_id(event) {
   event.preventDefault()
@@ -218,6 +229,7 @@ const voltage = ref(0)
 let clientId = "User"
 
 const load = ref(false)
+const loadModel = ref(false)
 
 function send(event) {
   event.preventDefault()
@@ -320,9 +332,10 @@ onMounted(() => {
                 chartComponentQuat2.addDataPoint(valuesArray[0], valuesArray[2]);
                 chartComponentQuat3.addDataPoint(valuesArray[0], valuesArray[3]);
                 chartComponentQuat4.addDataPoint(valuesArray[0], valuesArray[4]);
-
-                cubeRefComponent.quaternionArray = [parseFloat(valuesArray[1]), parseFloat(valuesArray[2]), parseFloat(valuesArray[3]), parseFloat(valuesArray[4])];
-                cubeRefComponent.$refs.cubeRef.quaternion(); // Call the quaternion method in Cube
+                if (loadModel.value == true) {
+                  cubeRefComponent.quaternionArray = [parseFloat(valuesArray[1]), parseFloat(valuesArray[2]), parseFloat(valuesArray[3]), parseFloat(valuesArray[4])];
+                  cubeRefComponent.$refs.cubeRef.quaternion(); // Call the quaternion method in Cube
+                }
               }
               if (sender == "Lps") {
                 let valuesArray = content.split(',');

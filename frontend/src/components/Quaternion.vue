@@ -59,13 +59,6 @@ export default {
         line.position.set(0, 0, 0);
         scene.add(cube, sphere, line);
 
-        const markerGeometry = new THREE.SphereGeometry(0.05, 16, 16);
-        const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
-        console.log('Marker:', marker);
-        // marker.position.set(, 0.5, 0.5);
-        scene.add(marker);
-
         camera.position.set(6, 6, 10);
         camera.lookAt(0, 0, 0);
 
@@ -89,18 +82,23 @@ export default {
             const lineWorldPosition = new THREE.Vector3();
             line.getWorldPosition(lineWorldPosition);
 
-            // Now 'lineWorldPosition' contains the world coordinates of the line's position
+            // Calculate the direction vector of the line
+            const lineDirection = new THREE.Vector3(1, 0, 0); // Assuming the line points in the positive x-direction
+            lineDirection.applyQuaternion(q);
 
-            // Create a point (sphere) at the line's world position
-            const pointGeometry = new THREE.SphereGeometry(2, 16, 16);
+            // Calculate the position of the point along the line at a distance of 3 units
+            const distance = 3;
+            const pointPosition = new THREE.Vector3().copy(lineDirection).multiplyScalar(distance);
+
+            // Create a point (sphere) at the calculated position
+            const pointGeometry = new THREE.SphereGeometry(0.05, 16, 16);
             const pointMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             const point = new THREE.Mesh(pointGeometry, pointMaterial);
-            point.position.copy(lineWorldPosition);
+            point.position.copy(lineWorldPosition).add(pointPosition);
 
             // Add the point to the scene
             scene.add(point);
         }
-
 
         onMounted(() => {
             renderer.value = new THREE.WebGLRenderer();
