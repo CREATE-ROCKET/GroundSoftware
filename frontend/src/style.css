@@ -124,3 +124,21 @@ body {
 #canvas {
   width: 33vw;
 }
+
+.status_field {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.status_left {
+  display: flex;
+  width: 50%;
+  margin-left: 0;
+}
+
+.status_right {
+  display: flex;
+  width: 50%;
+  margin-right: 0;
+}
