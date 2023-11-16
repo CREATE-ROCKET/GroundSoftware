@@ -58,10 +58,37 @@
         <div>
           <p>Voltage: {{ voltage }}</p>
         </div>
-        <p>Chart status: {{ load }}</p>
-        <button @click="load_change($event)" class="btn">Chart Change to {{ !load }}</button>
-        <p>Model status: {{ loadModel }}</p>
-        <button @click="loadModel_change($event)" class="btn">Model Change to {{ !loadModel }}</button>
+        <div class="status_field">
+          <div class="status_left">
+            <div class="status">
+              <p>Volt Chart status: {{ loadVolt }}</p>
+              <button @click="loadVolt_change($event)" class="btn">Volt Chart Change to {{ !loadVolt }}</button>
+            </div>
+            <div class="status">
+              <p>Quat Chart status: {{ loadQuat }}</p>
+              <button @click="loadQuat_change($event)" class="btn">Quat Chart Change to {{ !loadQuat }}</button>
+            </div>
+            <div class="status">
+              <p>Lps Chart status: {{ loadLps }}</p>
+              <button @click="loadLps_change($event)" class="btn">Lps Chart Change to {{ !loadLps }}</button>
+            </div>
+          </div>
+          <div class="status_right">
+            <div class="status">
+              <p>OpenRate Chart status: {{ loadOpenRate }}</p>
+              <button @click="loadOpenRate_change($event)" class="btn">OpenRate Chart Change to {{ !loadOpenRate
+              }}</button>
+            </div>
+            <div class="status">
+              <p>Model status: {{ loadModel }}</p>
+              <button @click="loadModel_change($event)" class="btn">Model Change to {{ !loadModel }}</button>
+            </div>
+            <div class="status">
+              <p>Quat Model Plot status: {{ quatStatus }}</p>
+              <button @click="quatStatus_change($event)" class="btn">Quat Plot Change to {{ !quatStatus }}</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="chart-section">
@@ -105,15 +132,15 @@ export default {
       quaternionArray: [1, 0.5, 0, 0.5], // Example: Rotate by 90 degrees around the y-axis
     };
   },
-  methods: {
-    rotateCube() {
-      // Modify quaternionArray or call any other method in the Cube component
-      // Example: rotate the cube by changing the quaternion values
-      this.quaternionArray = [0, 0, 0.7071, 0.7071]; // Example: Rotate by 180 degrees around the z-axis
-      // Access the Cube component using refs
-      this.$refs.cubeRef.quaternion(); // Call the quaternion method in Cube
-    },
-  },
+  // methods: {
+  //   rotateCube() {
+  //     // Modify quaternionArray or call any other method in the Cube component
+  //     // Example: rotate the cube by changing the quaternion values
+  //     this.quaternionArray = [0, 0, 0.7071, 0.7071]; // Example: Rotate by 180 degrees around the z-axis
+  //     // Access the Cube component using refs
+  //     this.$refs.cubeRef.quaternion(); // Call the quaternion method in Cube
+  //   },
+  // },
 };
 </script>
 
@@ -141,12 +168,39 @@ const srcId = ref('');
 const sendMessage = ref('');
 const isChecked = ref(false);
 
-function load_change(event) {
+function loadVolt_change(event) {
   event.preventDefault()
-  if (load.value == true) {
-    load.value = false
+  if (loadVolt.value == true) {
+    loadVolt.value = false
   } else {
-    load.value = true
+    loadVolt.value = true
+  }
+}
+
+function loadQuat_change(event) {
+  event.preventDefault()
+  if (loadQuat.value == true) {
+    loadQuat.value = false
+  } else {
+    loadQuat.value = true
+  }
+}
+
+function loadLps_change(event) {
+  event.preventDefault()
+  if (loadLps.value == true) {
+    loadLps.value = false
+  } else {
+    loadLps.value = true
+  }
+}
+
+function loadOpenRate_change(event) {
+  event.preventDefault()
+  if (loadOpenRate.value == true) {
+    loadOpenRate.value = false
+  } else {
+    loadOpenRate.value = true
   }
 }
 
@@ -156,6 +210,15 @@ function loadModel_change(event) {
     loadModel.value = false
   } else {
     loadModel.value = true
+  }
+}
+
+function quatStatus_change(event) {
+  event.preventDefault()
+  if (quatStatus.value == true) {
+    quatStatus.value = false
+  } else {
+    quatStatus.value = true
   }
 }
 
@@ -228,8 +291,14 @@ const logMessages = reactive([])
 const voltage = ref(0)
 let clientId = "User"
 
-const load = ref(false)
+const loadVolt = ref(false)
+const loadQuat = ref(false)
+const loadLps = ref(false)
+const loadOpenRate = ref(false)
+
 const loadModel = ref(false)
+
+const quatStatus = ref(false)
 
 function send(event) {
   event.preventDefault()
@@ -277,87 +346,105 @@ function scrollToBottom() {
 
 onMounted(() => {
   // const chartComponent = this.$refs.chartRef;
-  if (window.WebSocket) {
-    conn = new WebSocket("ws://localhost:3007/ws")
-    chartComponentVoltage = getCurrentInstance().proxy.$refs.chartRefVoltage;
-    chartComponentQuat1 = getCurrentInstance().proxy.$refs.chartRefQuat1;
-    chartComponentQuat2 = getCurrentInstance().proxy.$refs.chartRefQuat2;
-    chartComponentQuat3 = getCurrentInstance().proxy.$refs.chartRefQuat3;
-    chartComponentQuat4 = getCurrentInstance().proxy.$refs.chartRefQuat4;
-    chartComponentLps = getCurrentInstance().proxy.$refs.chartRefLps;
-    chartComponentOpenRate = getCurrentInstance().proxy.$refs.chartRefOpenRate;
-    cubeRefComponent = getCurrentInstance().proxy;
+  function connectWebSocket() {
+    if (window.WebSocket) {
+      conn = new WebSocket("ws://localhost:3007/ws")
+      chartComponentVoltage = getCurrentInstance().proxy.$refs.chartRefVoltage;
+      chartComponentQuat1 = getCurrentInstance().proxy.$refs.chartRefQuat1;
+      chartComponentQuat2 = getCurrentInstance().proxy.$refs.chartRefQuat2;
+      chartComponentQuat3 = getCurrentInstance().proxy.$refs.chartRefQuat3;
+      chartComponentQuat4 = getCurrentInstance().proxy.$refs.chartRefQuat4;
+      chartComponentLps = getCurrentInstance().proxy.$refs.chartRefLps;
+      chartComponentOpenRate = getCurrentInstance().proxy.$refs.chartRefOpenRate;
+      cubeRefComponent = getCurrentInstance().proxy;
 
-    conn.onclose = function (evt) {
-      var time = new Date().toLocaleString()
-      logMessages.push({ time, sender: "", content: "Connection closed." })
-    }
+      conn.onclose = function (evt) {
+        var time = new Date().toLocaleString()
+        logMessages.push({ time, sender: "", content: "Connection closed." })
 
-    conn.onmessage = function (evt) {
-      const messages = evt.data.split('\n')
-      for (let i = 0; i < messages.length; i++) {
-        const message = messages[i]
-        if (message == "") {
-          continue
-        }
-        const separatorIndex = message.indexOf(';') // 時刻とメッセージの区切り位置を探す
-        if (separatorIndex !== -1) {
-          var time = message.substring(0, separatorIndex) // 時刻を抽出
-          const content = message.substring(separatorIndex + 1) // メッセージ本文を抽出
+        // 再接続を試みる
+        setTimeout(function () {
+          connectWebSocket();
+        }, 5000); // 5秒後に再接続試行
+      }
 
-          const separatorIndex2 = message.indexOf('::') // 識別子とメッセージの区切り位置を探す
-          if (separatorIndex2 !== -1) {
-            const sender = message.substring(separatorIndex + 1, separatorIndex2) // 識別子を抽出
-            const content = message.substring(separatorIndex2 + 1 + 1) // メッセージ本文を抽出
-            logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
-          } else {
-            logMessages.push({ time, sender: "Anonymous", content })
+      conn.onmessage = function (evt) {
+        const messages = evt.data.split('\n')
+        for (let i = 0; i < messages.length; i++) {
+          const message = messages[i]
+          if (message == "") {
+            continue
           }
-        } else {
-          const separatorIndex2 = message.indexOf('::') // 識別子とメッセージの区切り位置を探す
-          if (separatorIndex2 !== -1) {
-            const sender = message.substring(0, separatorIndex2) // 識別子を抽出
-            const content = message.substring(separatorIndex2 + 1 + 1) // メッセージ本文を抽出
-            var time = new Date().toLocaleString()
-            logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
-            if (load.value == true) {
-              if (sender == "Voltage") {
-                voltage.value = content
-                let valuesArray = content.split(',');
-                chartComponentVoltage.addDataPoint(valuesArray[0], valuesArray[1]);
-              }
-              if (sender == "Quat") {
-                let valuesArray = content.split(',');
-                chartComponentQuat1.addDataPoint(valuesArray[0], valuesArray[1]);
-                chartComponentQuat2.addDataPoint(valuesArray[0], valuesArray[2]);
-                chartComponentQuat3.addDataPoint(valuesArray[0], valuesArray[3]);
-                chartComponentQuat4.addDataPoint(valuesArray[0], valuesArray[4]);
-                if (loadModel.value == true) {
-                  cubeRefComponent.quaternionArray = [parseFloat(valuesArray[1]), parseFloat(valuesArray[2]), parseFloat(valuesArray[3]), parseFloat(valuesArray[4])];
-                  cubeRefComponent.$refs.cubeRef.quaternion(); // Call the quaternion method in Cube
-                }
-              }
-              if (sender == "Lps") {
-                let valuesArray = content.split(',');
-                chartComponentLps.addDataPoint(valuesArray[0], valuesArray[1]);
-              }
-              if (sender == "OpenRate") {
-                let valuesArray = content.split(',');
-                chartComponentOpenRate.addDataPoint(valuesArray[0], valuesArray[1]);
-              }
+          const separatorIndex = message.indexOf(';') // 時刻とメッセージの区切り位置を探す
+          if (separatorIndex !== -1) {
+            var time = message.substring(0, separatorIndex) // 時刻を抽出
+            const content = message.substring(separatorIndex + 1) // メッセージ本文を抽出
+
+            const separatorIndex2 = message.indexOf('::') // 識別子とメッセージの区切り位置を探す
+            if (separatorIndex2 !== -1) {
+              const sender = message.substring(separatorIndex + 1, separatorIndex2) // 識別子を抽出
+              const content = message.substring(separatorIndex2 + 1 + 1) // メッセージ本文を抽出
+              logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
+            } else {
+              logMessages.push({ time, sender: "Anonymous", content })
             }
           } else {
-            var time = new Date().toLocaleString()
-            logMessages.push({ time, sender: "", content: message })
+            const separatorIndex2 = message.indexOf('::') // 識別子とメッセージの区切り位置を探す
+            if (separatorIndex2 !== -1) {
+              const sender = message.substring(0, separatorIndex2) // 識別子を抽出
+              const content = message.substring(separatorIndex2 + 1 + 1) // メッセージ本文を抽出
+              var time = new Date().toLocaleString()
+              logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
+              if (loadVolt.value == true) {
+                if (sender == "Voltage") {
+                  voltage.value = content
+                  let valuesArray = content.split(',');
+                  chartComponentVoltage.addDataPoint(valuesArray[0], valuesArray[1]);
+                }
+              }
+              if (loadQuat.value == true) {
+                if (sender == "Quat") {
+                  let valuesArray = content.split(',');
+                  chartComponentQuat1.addDataPoint(valuesArray[0], valuesArray[1]);
+                  chartComponentQuat2.addDataPoint(valuesArray[0], valuesArray[2]);
+                  chartComponentQuat3.addDataPoint(valuesArray[0], valuesArray[3]);
+                  chartComponentQuat4.addDataPoint(valuesArray[0], valuesArray[4]);
+                }
+              }
+              if (loadLps.value == true) {
+                if (sender == "Lps") {
+                  let valuesArray = content.split(',');
+                  chartComponentLps.addDataPoint(valuesArray[0], valuesArray[1]);
+                }
+              }
+              if (loadOpenRate.value == true) {
+                if (sender == "OpenRate") {
+                  let valuesArray = content.split(',');
+                  chartComponentOpenRate.addDataPoint(valuesArray[0], valuesArray[1]);
+                }
+              }
+              if (loadModel.value == true) {
+                if (sender == "Quat") {
+                  let valuesArray = content.split(',');
+                  cubeRefComponent.quaternionArray = [parseFloat(valuesArray[1]), parseFloat(valuesArray[2]), parseFloat(valuesArray[3]), parseFloat(valuesArray[4])];
+                  cubeRefComponent.$refs.cubeRef.quaternion(quatStatus.value); // Call the quaternion method in Cube
+                }
+              }
+            } else {
+              var time = new Date().toLocaleString()
+              logMessages.push({ time, sender: "", content: message })
+            }
           }
+          scrollToBottom()
         }
-        scrollToBottom()
       }
+    } else {
+      var time = new Date().toLocaleString()
+      logMessages.push({ time, sender: "", content: "Your browser does not support WebSockets." })
     }
-  } else {
-    var time = new Date().toLocaleString()
-    logMessages.push({ time, sender: "", content: "Your browser does not support WebSockets." })
   }
+  // WebSocket接続を開始
+  connectWebSocket();
 })
 </script>
 

@@ -33,7 +33,7 @@ export default {
         grid.position.y = -0.6;
         scene.add(grid);
         // === model ===
-        const geometry = new THREE.BoxGeometry(1, 0.5, 0.5);
+        const geometry = new THREE.BoxGeometry(0.5, 1, 0.5);
         const material = [
             new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0, roughness: 1 }),
             new THREE.MeshStandardMaterial({ color: 0xF4D06F }),
@@ -47,8 +47,8 @@ export default {
         const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00, transparent: true, opacity: 0.5 });
         const sphere = new THREE.Mesh(geometry2, material2);
         const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-            new THREE.Vector3(-1, 0, 0),
-            new THREE.Vector3(10, 0, 0), // You can adjust the length and direction of the line
+            new THREE.Vector3(0, -1, 0),
+            new THREE.Vector3(0, 10, 0), // You can adjust the length and direction of the line
         ]);
 
         const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00 });
@@ -70,34 +70,44 @@ export default {
             }
         }
 
-        function quaternion() {
+        let timestamp = new Date().getTime();
+
+        function quaternion(status) {
             if (typeof qua.value[0] === 'undefined') {
                 console.log('quaternion is undefined');
                 return;
             }
-            const q = new THREE.Quaternion(qua.value[0], qua.value[1], qua.value[2], qua.value[3]);
+            // const q = new THREE.Quaternion(0,0,0,1);
+            const q = new THREE.Quaternion(qua.value[2], qua.value[3], qua.value[1], qua.value[0]);
+            // const q = new THREE.Quaternion(qua.value[1], qua.value[2], qua.value[3], qua.value[0]);
             cube.quaternion.copy(q);
             line.quaternion.copy(q);
-            // Get the world position of the line
-            const lineWorldPosition = new THREE.Vector3();
-            line.getWorldPosition(lineWorldPosition);
 
-            // Calculate the direction vector of the line
-            const lineDirection = new THREE.Vector3(1, 0, 0); // Assuming the line points in the positive x-direction
-            lineDirection.applyQuaternion(q);
+            // if more than 3 seconds have passed, reset the line
+            if ((new Date().getTime() - timestamp > 3000)&&(status == true)) {
+                timestamp = new Date().getTime();
 
-            // Calculate the position of the point along the line at a distance of 3 units
-            const distance = 3;
-            const pointPosition = new THREE.Vector3().copy(lineDirection).multiplyScalar(distance);
+                // Get the world position of the line
+                const lineWorldPosition = new THREE.Vector3();
+                line.getWorldPosition(lineWorldPosition);
 
-            // Create a point (sphere) at the calculated position
-            const pointGeometry = new THREE.SphereGeometry(0.05, 16, 16);
-            const pointMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-            const point = new THREE.Mesh(pointGeometry, pointMaterial);
-            point.position.copy(lineWorldPosition).add(pointPosition);
+                // Calculate the direction vector of the line
+                const lineDirection = new THREE.Vector3(0, 1, 0); // Assuming the line points in the positive x-direction
+                lineDirection.applyQuaternion(q);
 
-            // Add the point to the scene
-            scene.add(point);
+                // Calculate the position of the point along the line at a distance of 3 units
+                const distance = 3;
+                const pointPosition = new THREE.Vector3().copy(lineDirection).multiplyScalar(distance);
+
+                // Create a point (sphere) at the calculated position
+                const pointGeometry = new THREE.SphereGeometry(0.05, 16, 16);
+                const pointMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                const point = new THREE.Mesh(pointGeometry, pointMaterial);
+                point.position.copy(lineWorldPosition).add(pointPosition);
+
+                // Add the point to the scene
+                scene.add(point);
+            }
         }
 
         onMounted(() => {
