@@ -4,7 +4,7 @@
 
 <script>
 import { ref, onMounted, onUnmounted, toRefs } from 'vue';
-import * as THREE from 'three';
+import * as THREE from "three";
 
 export default {
     name: 'Cube',
