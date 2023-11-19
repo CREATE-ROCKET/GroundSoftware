@@ -122,9 +122,12 @@ func StartCommand(data []byte) (int, int, error) {
 // データを解析する関数
 // 来るデータは長さコマンドから始まる
 func (a *App) ParseData(data []byte) {
+	if len(data) < 11 {
+		return
+	}
 	header := data[11]
 	/// log.Printf("Header: 0x%02x\n", header)
-	if header != 0x40 || data[0] != 0xb7 {
+	if header != 0x41 || data[0] != 0xb7 {
 		if header == 0x50 && data[0] == 0x17 {
 			// 電圧データなし
 			// 電圧用のコード

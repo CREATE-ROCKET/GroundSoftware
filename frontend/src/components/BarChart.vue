@@ -5,7 +5,10 @@
 </template>
 
 <script>
-import Chart from 'chart.js/auto';
+import { Chart, LinearScale, PointElement, LineController, LineElement } from 'chart.js';
+
+// Register the necessary components
+Chart.register(LinearScale, PointElement, LineController, LineElement);
 
 export default {
     methods: {
@@ -16,8 +19,7 @@ export default {
                 data: {
                     datasets: [{
                         label: 'データポイント',
-                        data: [
-                        ],
+                        data: [],
                         backgroundColor: 'rgba(75, 192, 192, 0.5)',
                         pointRadius: 2
                     }]

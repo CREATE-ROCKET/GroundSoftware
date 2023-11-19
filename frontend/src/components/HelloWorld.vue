@@ -118,8 +118,8 @@
 
 
 <script>
-import Cube from './Quaternion.vue';
-import ChartComponent from './BarChart.vue';
+import Cube from '/src/components/Quaternion.vue';
+import ChartComponent from '/src/components/BarChart.vue';
 
 
 export default {
@@ -156,9 +156,9 @@ import { SelectedPort } from '../../wailsjs/go/handler/App'
 import { ModuleStart } from '../../wailsjs/go/handler/App'
 import { ModuleSend } from '../../wailsjs/go/handler/App'
 import { ModuleEnv } from '../../wailsjs/go/handler/App'
-import Footer from './Footer.vue';
+import Footer from '/src/components/Footer.vue';
 
-import Chart from './BarChart.vue';
+import Chart from '/src/components/BarChart.vue';
 
 // import Quaternion from './Quaternion.vue'
 
