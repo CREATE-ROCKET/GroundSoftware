@@ -78,8 +78,8 @@ export default {
                 return;
             }
             // const q = new THREE.Quaternion(0,0,0,1);
-            // const q = new THREE.Quaternion(qua.value[2], qua.value[3], qua.value[1], qua.value[0]);
-            const q = new THREE.Quaternion(qua.value[1], qua.value[2], qua.value[3], qua.value[0]);
+            const q = new THREE.Quaternion(qua.value[2], qua.value[3], qua.value[1], qua.value[0]);
+            // const q = new THREE.Quaternion(qua.value[1], qua.value[2], qua.value[3], qua.value[0]);
             cube.quaternion.copy(q);
             line.quaternion.copy(q);
 
