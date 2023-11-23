@@ -127,7 +127,7 @@ func (a *App) ParseData(data []byte) {
 	}
 	header := data[11]
 	/// log.Printf("Header: 0x%02x\n", header)
-	if header != 0x41 || data[0] != 0xb7 {
+	if header != 0x41 || data[0] != 0xb7 { // data[0]は長さコマンド 195になるかも
 		if header == 0x50 && data[0] == 0x17 {
 			// 電圧データなし
 			// 電圧用のコード

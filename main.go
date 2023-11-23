@@ -34,8 +34,8 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "CREATE Serial Monitor",
-		Width:  1024,
-		Height: 768,
+		Width:  10240,
+		Height: 7680,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},

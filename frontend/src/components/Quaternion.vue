@@ -57,9 +57,11 @@ export default {
         sphere.position.set(0, 0, 0);
         cube.position.set(0, 0, 0);
         line.position.set(0, 0, 0);
-        scene.add(cube, sphere, line);
+        // scene.add(sphere);
+        scene.add(cube, line);
 
-        camera.position.set(6, 6, 10);
+        // camera.position.set(6, 6, 10);
+        camera.position.set(5, 5, 7);
         camera.lookAt(0, 0, 0);
 
         function animate() {
@@ -114,8 +116,9 @@ export default {
             renderer.value = new THREE.WebGLRenderer();
             if (stage.value) {
                 stage.value.appendChild(renderer.value.domElement);
-                renderer.value.setSize(stage.value.offsetWidth / 1.25, 500);
-                camera.aspect = (stage.value.offsetWidth / 1.25) / 500;
+                // renderer.value.setSize(stage.value.offsetWidth / 1.25, 500);
+                renderer.value.setSize(stage.value.offsetWidth / 1.25*1.2, 1000*1.2);
+                camera.aspect = (stage.value.offsetWidth / 1.25) / 1000;
                 camera.updateProjectionMatrix();
                 animate();
             }
