@@ -70,7 +70,7 @@ func (a *App) SerialStart() {
 	go a.ReceiveData(receivedData)
 
 	// Read and print the response
-	buff := make([]byte, 1024)
+	buff := make([]byte, 512)
 	for {
 		n, err := model.Port.Read(buff)
 		if err != nil {
@@ -78,7 +78,8 @@ func (a *App) SerialStart() {
 			model.HUB.SendError(err.Error())
 			// return
 		}
-		log.Printf("buffer length: %d\n", n)
+		// log.Printf("buffer length: %d\n", n)
+
 		// model.HUB.SendText("Serial::" + byteArrayToString(buff[:n]))
 
 		// if n == 0 {

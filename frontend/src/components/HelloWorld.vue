@@ -57,6 +57,9 @@
         </form>
         <div>
           <p>Voltage: {{ voltage }}</p>
+          <p>Quat: {{ quatValue }}</p>
+          <p>LPS: {{ LpsValue }}</p>
+          <p>OpenRate: {{ OpenRateValue }}</p>
         </div>
         <div class="status_field">
           <div class="status_left">
@@ -91,6 +94,7 @@
         </div>
       </div>
     </div>
+    <Cube :qua="quaternionArray" ref="cubeRef" />
     <div class="chart-section">
       <p>Voltage</p>
       <Chart ref="chartRefVoltage" />
@@ -111,7 +115,6 @@
       <p>OpenRate</p>
       <Chart ref="chartRefOpenRate" />
     </div>
-    <Cube :qua="quaternionArray" ref="cubeRef" />
   </main>
   <Footer />
 </template>
@@ -288,7 +291,10 @@ function serial_stop(event) {
 }
 
 const logMessages = reactive([])
-const voltage = ref(0)
+const voltage = ref('')
+const quatValue = ref('')
+const LpsValue = ref('')
+const OpenRateValue = ref('')
 let clientId = "User"
 
 const loadVolt = ref(false)
@@ -395,40 +401,44 @@ onMounted(() => {
               const content = message.substring(separatorIndex2 + 1 + 1) // メッセージ本文を抽出
               var time = new Date().toLocaleString()
               logMessages.push({ time, sender, content }) // 送信者とメッセージを表示
-              if (loadVolt.value == true) {
-                if (sender == "Voltage") {
-                  voltage.value = content
+              if (sender == "Voltage") {
+                if (loadVolt.value == true) {
                   let valuesArray = content.split(',');
                   chartComponentVoltage.addDataPoint(valuesArray[0], valuesArray[1]);
                 }
+                voltage.value = content;
               }
-              if (loadQuat.value == true) {
-                if (sender == "Quat") {
+              if (sender == "Quat") {
+                if (loadQuat.value == true) {
                   let valuesArray = content.split(',');
                   chartComponentQuat1.addDataPoint(valuesArray[0], valuesArray[1]);
                   chartComponentQuat2.addDataPoint(valuesArray[0], valuesArray[2]);
                   chartComponentQuat3.addDataPoint(valuesArray[0], valuesArray[3]);
                   chartComponentQuat4.addDataPoint(valuesArray[0], valuesArray[4]);
                 }
+                quatValue.value = content;
               }
-              if (loadLps.value == true) {
-                if (sender == "Lps") {
+              if (sender == "Lps") {
+                if (loadLps.value == true) {
                   let valuesArray = content.split(',');
                   chartComponentLps.addDataPoint(valuesArray[0], valuesArray[1]);
                 }
+                LpsValue.value = content;
               }
-              if (loadOpenRate.value == true) {
-                if (sender == "OpenRate") {
+              if (sender == "OpenRate") {
+                if (loadOpenRate.value == true) {
                   let valuesArray = content.split(',');
                   chartComponentOpenRate.addDataPoint(valuesArray[0], valuesArray[1]);
                 }
+                OpenRateValue.value = content;
               }
-              if (loadModel.value == true) {
-                if (sender == "Quat") {
+              if (sender == "Quat") {
+                if (loadModel.value == true) {
                   let valuesArray = content.split(',');
                   cubeRefComponent.quaternionArray = [parseFloat(valuesArray[1]), parseFloat(valuesArray[2]), parseFloat(valuesArray[3]), parseFloat(valuesArray[4])];
                   cubeRefComponent.$refs.cubeRef.quaternion(quatStatus.value); // Call the quaternion method in Cube
                 }
+                quatValue.value = content;
               }
             } else {
               var time = new Date().toLocaleString()
