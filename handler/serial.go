@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/Luftalian/Computer_software/model"
 	"go.bug.st/serial"
@@ -25,7 +26,7 @@ func (a *App) SerialStart() {
 	}
 
 	var err error
-	a.rawFile, err = os.OpenFile(a.rawFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	a.rawFile, err = os.OpenFile(filepath.Join("data", a.timeFile, "raw_"+a.timeFile+".txt"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
@@ -33,7 +34,7 @@ func (a *App) SerialStart() {
 	}
 	defer a.rawFile.Close()
 
-	a.quatFile, err = os.OpenFile(a.quatFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	a.quatFile, err = os.OpenFile(filepath.Join("data", a.timeFile, "quat_"+a.timeFile+".txt"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
@@ -41,7 +42,7 @@ func (a *App) SerialStart() {
 	}
 	defer a.quatFile.Close()
 
-	a.lpsFile, err = os.OpenFile(a.lpsFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	a.lpsFile, err = os.OpenFile(filepath.Join("data", a.timeFile, "lps_"+a.timeFile+".txt"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
@@ -49,7 +50,7 @@ func (a *App) SerialStart() {
 	}
 	defer a.lpsFile.Close()
 
-	a.openFile, err = os.OpenFile(a.openFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	a.openFile, err = os.OpenFile(filepath.Join("data", a.timeFile, "open_"+a.timeFile+".txt"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())
@@ -57,7 +58,7 @@ func (a *App) SerialStart() {
 	}
 	defer a.openFile.Close()
 
-	a.voltFile, err = os.OpenFile(a.voltFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	a.voltFile, err = os.OpenFile(filepath.Join("data", a.timeFile, "volt_"+a.timeFile+".txt"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Println(err)
 		model.HUB.SendError(err.Error())

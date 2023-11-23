@@ -14,33 +14,48 @@ import (
 // so we can call the runtime methods
 func (a *App) Startup(ctx context.Context) {
 	a.ctx = ctx
-	log.Print("-------------------------------------------sssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
-	a.ModuleEnv()
+	log.Print("jjjjjj")
+	// a.ModuleEnv()
+	log.Println("----------------------------------")
 
 	timestamp := time.Now().Format("2006-01-02-15-04-05") // フォーマット例: 2023-10-26-14-30-00
+	log.Println("----------------------------------")
 
 	_, err := os.Stat("data")
+	log.Println("----------------------------------")
 	if err == nil {
+		log.Println("No error when data directory exists")
 	} else if os.IsNotExist(err) {
 		err = os.Mkdir("data", 0755)
 		if err != nil {
+			log.Println("made data but not good")
 			return
 		}
+		log.Println("made data dir good")
 	} else {
+		log.Println(err)
+		log.Println("error")
 		return
 	}
+	log.Println("----------------------------------")
 
 	a.rawFileName = filepath.Join("data", timestamp, "raw_"+timestamp+".txt")
+	log.Println("----------------------------------")
+	a.timeFile = timestamp
+	log.Print(timestamp)
+	log.Println(a.timeFile)
 	a.rawFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.rawFileName)
 	if err != nil {
 		log.Println(err)
 	}
 
+	log.Println("----------------------------------")
 	a.quatFileName = filepath.Join("data", timestamp, "quat_"+timestamp+".txt")
 	a.quatFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.quatFileName)
 	if err != nil {
 		log.Println(err)
 	}
+	log.Println("----------------------------------")
 
 	a.lpsFileName = filepath.Join("data", timestamp, "lps_"+timestamp+".txt")
 	a.lpsFile, err = makeDirAndFile(filepath.Join("data", timestamp), a.lpsFileName)
@@ -58,6 +73,7 @@ func (a *App) Startup(ctx context.Context) {
 	if err != nil {
 		log.Println(err)
 	}
+	log.Println("End SetUp")
 }
 
 func (a *App) Shutdown(ctx context.Context) {

@@ -122,7 +122,7 @@ func StartCommand(data []byte) (int, int, error) {
 // データを解析する関数
 // 来るデータは長さコマンドから始まる
 func (a *App) ParseData(data []byte) {
-	if len(data) < 11 {
+	if len(data) < 12 {
 		return
 	}
 	header := data[11]

@@ -18,6 +18,7 @@ type App struct {
 	lpsFile      *os.File
 	openFile     *os.File
 	voltFile     *os.File
+	timeFile string
 }
 
 // NewApp creates a new App application struct

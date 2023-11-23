@@ -29,7 +29,7 @@ func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 		model.HUB.SendError(err.Error())
 	}
 
-	if quatIndex%50 == 0 {
+	if quatIndex%8 == 0 {
 		model.HUB.SendText(fmt.Sprintf("Quat::%d,%g,%g,%g,%g,\n", time, floatQuat1, floatQuat2, floatQuat3, floatQuat4))
 		// model.AppendStringToFile(fmt.Sprintf("%s,%s\n", byteArrayToString(timeData), byteArrayToString(quatData[:16])), a.quatFileName)
 		quatIndex = 0
