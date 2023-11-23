@@ -39,7 +39,8 @@ func (a *App) QuatAndTimeToFile(timeData []byte, quatData []byte) {
 
 func (a *App) LpsAndTimeToFile(timeData []byte, lpsData []byte) {
 	time := binary.LittleEndian.Uint32(timeData)
-	lps := binary.LittleEndian.Uint16(lpsData[0:3])
+	lpsData = append(lpsData, 0x00)
+	lps := binary.LittleEndian.Uint32(lpsData[0:4])
 
 	// err := model.AppendStringToFile(fmt.Sprintf("%d,%d,\n", time, lps), a.lpsFileName)
 	err := model.AppendStringToFileDirect(fmt.Sprintf("%d,%d,\n", time, lps), a.lpsFile)
